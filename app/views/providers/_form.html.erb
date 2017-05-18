@@ -40,12 +40,75 @@
           <%= f.select :salutation,[['',''],['Dr','Dr'],['Mr','Mr'],['Mrs','Mrs'],['Dr and Mrs','Dr and Mrs'],['Mr and Mrs','Mr and Mrs']] %>
         </div>
 
-        <div class="field">
+        <div class="field" id="address-json-field">
             <%= f.label :address, :class =>"col-md-12" %>
           <%=f.fields_for :address do |address_form|%>
               <%= render 'address_fields' ,f:address_form%>
           <% end %>
         </div>
+        
+  <script>
+   var i=0;
+  function onAddJsonAddress(){
+      ++i;
+      var new_jsonfield='<div class="json-header col-md-12">'+
+              '<div class="col-md-4">Address</div>'+
+              '<div class="col-md-2 col-md-offset-5">'+
+              '<a class="glyphicon glyphicon-plus" id="div-plus-add-' + i.toString(10) + '" onclick="onAddJsonAddress()"></a></div>'+
+              '</div>'+
+              '<div class="json-body col-md-12" id="json-array-' + i.toString(10) + '">'+
+              '<div class="row col-md-12">'+
+              '<div class="col-md-3">'+
+              '<select  name="provider[address_attributes][' + i.toString(10) + '][type]" id="provider_address_attributes_' + i.toString(10) + '_type">'+
+              '<option selected="selected" value="primary">Primary</option>'+
+              '<option value="home">Home</option>'+
+              '<option value="work">Work</option>'+
+              '<option value="alternate">Alternate</option>'
+              '</div>'+
+              '<div class="col-md-9">'+
+              '<input type="text" placeholder="Street" name="provider[address_attributes][' + i.toString(10) + '][street]" id="provider_address_attributes_'+ i.toString(10) + '_street">'+
+              '</div>'+
+              '<div class="col-md-3 col-md-offset-3">'+
+              '<select name="provider[address_attributes][' + i.toString(10) + '][state]" id="provider_address_attributes_' + i.toString(10) + '_state">'+
+              '<option value="AL">Alabama</option>'+
+              '<option value="AK">Alaska</option>'+
+              '<option value="AZ">Arizona</option>'+
+              '<option value="AR">Arkansas</option>'+
+              '<option value="CA">California</option>'+
+              '<option value="CO">Colorado</option>'+
+              '<option value="CT">Connecticut</option>'+
+              '<option value="DE">Delaware</option>'+
+              '<option value="DC">District of Columbia</option>'+
+              '<option value="FL">Florida</option>'+
+              '<option value="GA">Georgia</option>'+
+              '<option value="HI">Hawaii</option>'+
+              '<option value="ID">Idaho</option>'+
+              '<option value="IL">Illinois</option>'+
+              '<option value="IN">Indiana</option>'+
+              '<option value="IA">Iowa</option>'+
+              '<option value="KS">Kansas</option>'+
+              '<option value="KY">Kentucky</option>'+
+              '<option value="LA">Louisiana</option>'+
+              '<option value="ME">Maine</option>'+
+              '<option value="MD">Maryland</option>'+
+              '<option value="MA">Massachusetts</option>'+
+              '</select>'+
+              '</div>'+
+              '<div class="col-md-3">'+
+              '<input type="text" placeholder="City" name="provider[address_attributes][' + i.toString(10) + '][city]" id="provider_address_attributes_' + i.toString(10) + '_city">'+
+              '</div>'+
+              '<div class="col-md-3">'+
+              '<input type="text" name="provider[address_attributes][' + i.toString(10) + '][zip]" id="provider_address_attributes_' + i.toString(10) + '_zip">'+
+              '</div>'+
+              '<input type="hidden" name="provider[address_attributes][' + i.toString(10) + '][_destroy]" id="provider_address_attributes_' + i.toString(10) + '__destroy">'+
+              '</div>'+
+              '</div>';
+              
+      $("#address-json-field").append(new_jsonfield);
+  }
+
+</script>
+        
         
 
         <div class="field">

@@ -2,7 +2,7 @@
   <div class="form-group">
     <%= javascript_include_tag 'report_new'%>
     <%= link_to 'Back', reports_path, :class=>"btn btn-custom pull-right" %>
-    <h3>Edit Report</h3>
+    <h3>Editing <%=@report.name %></h3>
   </div>
   <div class="div-1">
     <div class=" page-header form-group">
@@ -10,12 +10,12 @@
     </div>
     <div class="info-group">
     
-      <div class=" form-group">
-          <span>Title:</span>
-      </div>
-      <div class="form-group">
-          <input id="report_name_id" type="text" class="form-control" placeholder="New Report" value="<%=@report.name %>">
-      </div>
+      <!--<div class=" form-group">-->
+      <!--    <span>Title:</span>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+      <!--    <input id="report_name_id" type="text" class="form-control" placeholder="New Report" value="<%=@report.name %>">-->
+      <!--</div>-->
         
       <div class=" form-group">
           <span>Module:</span>

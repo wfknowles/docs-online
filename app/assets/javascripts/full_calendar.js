@@ -3,15 +3,24 @@ initialize_calendar = function() {
   $('.calendar').each(function(){
     var calendar = $(this);
     calendar.fullCalendar({
+      customButtons: {
+        addShift: {
+          text: 'New Shift',
+          click: function() {
+            $('#new_event').modal('show');
+          }
+        }
+      },
       header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        left: 'title',
+        right: 'prev,next addShift'
       },
       selectable: true,
       selectHelper: true,
       editable: true,
       eventLimit: true,
+      displayEventEnd: true,
+      timeFormat: 'h:mmt',
       events: '/events.json',
 
       select: function(start, end) {

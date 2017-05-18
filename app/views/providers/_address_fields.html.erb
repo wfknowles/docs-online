@@ -1,8 +1,8 @@
 <div class="json-header col-md-12">
     <div class="col-md-4">Address</div>
-    <div class="col-md-2 col-md-offset-5"><a class="glyphicon glyphicon-plus" id="add-address-item"></a></div>
+    <div class="col-md-2 col-md-offset-5"><a class="glyphicon glyphicon-plus" id="div-plus-add-0" onclick="onAddJsonAddress()"></a></div>
 </div>
-<div class="json-body col-md-12" id="json-body-1">
+<div class="json-body col-md-12" id="json-array-0">
   <div class="row col-md-12">
     <div class="col-md-3"><%= f.select :type, [['Primary','primary'],['Home','home'],['Work','work'],['Alternate','alternate']] %></div>
     <div class="col-md-9"><%= f.text_field :street, placeholder: "Street Address" %></div>

@@ -123,11 +123,11 @@ table thead tr th {
     color: #999;
     font-weight: normal;
 }
-.page-header h3,.page-header h1 {
-    font-family: Georgia, "Times New Roman", Times, serif;
-    color: #999;
-    font-weight: normal;
-}
+/*.page-header h3,.page-header h1 {*/
+/*    font-family: Georgia, "Times New Roman", Times, serif;*/
+/*    color: #999;*/
+/*    font-weight: normal;*/
+/*}*/
 
 .btn-custom {
     border: 2px solid #f7d035;

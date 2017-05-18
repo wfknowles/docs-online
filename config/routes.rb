@@ -59,7 +59,8 @@ Rails.application.routes.draw do
   resources :documents
   resources :reports
   resources  :notes
-  resources :events, :path => "shifts"
+  #resources :events, :path => "shifts"
+  resources :events
   get 'home/index'
   get '/providers/history',to: 'providers#history',as: :providers_history
   post '/providers/:id/undo', to: 'providers#undo', as: :undo
