@@ -8,7 +8,7 @@ row_array=[];
 row_array.push(i);
 
 function filterProvider1(){
-    var selectedProviderItemIndex=$("#filterList_provider_show_1")[0].selectedIndex;
+    var selectedProviderItemIndex=$("#filterList_provider")[0].selectedIndex;
     console.log(selectedProviderItemIndex);
     $("#filterList_provider").prop('selectedIndex',selectedProviderItemIndex);
     var selectedFilterProviderRealText=$("#filterList_provider").val();
@@ -53,7 +53,7 @@ function isAdded(selectText){
 }
 
 function filterShift1(){
-    var selectedShiftItemIndex=$("#filterList_shift_show_1")[0].selectedIndex;
+    var selectedShiftItemIndex=$("#filterList_shift")[0].selectedIndex;
     $("#filterList_provider").prop('selectedIndex',selectedShiftItemIndex);
     var selectedFilterShiftRealText=$("#filterList_shift").val();
     $("#shift_type_select").prop('selectedIndex',selectedShiftItemIndex);
@@ -109,7 +109,7 @@ function onDateSetting1(){
 }
 
 function filterSite1(){
-    var selectedSiteItemIndex=$("#filterList_site_show_1")[0].selectedIndex;
+    var selectedSiteItemIndex=$("#filterList_site")[0].selectedIndex;
     $("#filterList_site").prop('selectedIndex',selectedSiteItemIndex);
     var selectedFilterSiteRealText=$("#filterList_provider").val();
     $("#site_type_select").prop('selectedIndex',selectedSiteItemIndex);

@@ -1,7 +1,5 @@
 <div class="container">
   <div class="form-group">
-   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag :application %>
     <%= javascript_include_tag 'report_new'%>
     <%= link_to 'Back', reports_path, :class=>"btn btn-custom pull-right" %>
     <h3>Edit Report</h3>
@@ -416,7 +414,7 @@
           </td>
           <td style="padding-top: 10px;">
             <div class="wf_slideDownUp_Div tr_cnt_1" style="opacity: 1;height: auto;overflow: visible">
-              <select  id="filterList_shift" name="filterList_shift" class="select form-control" style="width:200px;max-height:80px;overflow: auto;margin-left: 7px;">
+              <select  id="filterList_shift" name="filterList_shift" onchange="filterShift1()" class="select form-control" style="width:200px;max-height:80px;overflow: auto;margin-left: 7px;">
                <% Event.column_names.each do |column_name| %>
                       <option><%= column_name.titlecase %></option>
                   <% end %>
@@ -445,7 +443,7 @@
                   </select> -->
 
 
-              <select  id="filterList_site" name="filterList_site"  class="select form-control" style="width:200px;max-height:80px;overflow: auto;margin-left: 7px;">
+              <select  id="filterList_site" name="filterList_site" onchange="filterSite1()" class="select form-control" style="width:200px;max-height:80px;overflow: auto;margin-left: 7px;">
                 <% Site.column_names.each do |column_name| %>
                     <option><%= column_name.titlecase %></option>
                 <% end %>
@@ -473,27 +471,27 @@
                  </select> -->
 
 
-              <select id="provider_type_select" style="display: none;">
+              <select id="provider_type_select" style="display:none;">
                 <% Provider.column_names.each do |column_name|%>
                     <option><%=Provider.columns_hash[column_name].type%></option>
                 <% end %>
               </select>
 
-              <select id="site_type_select" style="display: none;">
+              <select id="site_type_select" style="display:none;">
                 <% Site.column_names.each do |column_name|%>
                     <option><%=Site.columns_hash[column_name].type%></option>
                 <% end %>
               </select>
 
 
-              <select id="shift_type_select" style="display: none;">
+              <select id="shift_type_select" style="display:none;">
                 <% Event.column_names.each do |column_name|%>
                     <option><%=Event.columns_hash[column_name].type%></option>
                 <% end %>
               </select>
 
 
-              <select  id="filterList_provider" name="filterList_provider"  class="select form-control" style="width:200px;max-height:50px;overflow: auto;margin-left: 7px;">
+              <select  id="filterList_provider" name="filterList_provider"  onchange="filterProvider1()" class="select form-control" style="width:200px;max-height:50px;overflow: auto;margin-left: 7px;">
                 <% Provider.column_names.each do |column_name| %>
                     <option><%= column_name.titlecase %></option>
                 <% end %>

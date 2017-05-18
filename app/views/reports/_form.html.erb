@@ -13,49 +13,49 @@
 
 
     <div class="row">
-      <div class="field" style="display: none;">
+      <div class="field">
         <%= f.label :name, :class =>"col-md-4" %>
         <%= f.text_field :name ,id:'name-field-id'%>
       </div>
 
       <% if user_signed_in? %>
-          <div class="field"  style="display: none">
+          <div class="field">
             <%= f.label :creator, :class =>"col-md-4" %>
             <%= f.text_field :creator ,value:current_user.name %>
           </div>
       <% end %>
 
-      <div class="field" style="display: none">
+      <div class="field">
         <%= f.label :module, :class =>"col-md-4" %>
         <%= f.text_field :module ,id:'module-field-id'%>
       </div>
 
-      <div class="field" style="display: none">
+      <div class="field">
         <%= f.label :type, :class =>"col-md-4" %>
         <%= f.text_field :typed ,id:"type-field-id"%>
       </div>
 
-      <div class="field" style="display: none">
+      <div class="field">
         <%= f.label :representation, :class =>"col-md-4" %>
         <%= f.text_field :representation,id:'representation-field-id'%>
       </div>
 
-      <div class="field" style="display: none">
+      <div class="field">
         <%= f.label :filter_field, :class =>"col-md-4" %>
         <%= f.text_field :filter_field,id:'filter-field-id'%>
       </div>
 
-      <div class="field" style="display: none">
+      <div class="field">
         <%= f.label :operator, :class =>"col-md-4" %>
         <%= f.text_field :operator,id:'operator-field-id'%>
       </div>
 
-      <div class="field" style="display: none">
+      <div class="field">
         <%= f.label :first_val, :class =>"col-md-4" %>
         <%= f.text_field :first_val,id:'first-val-field-id'%>
       </div>
 
-      <div class="field" style="display: none">
+      <div class="field">
         <%= f.label :second_val, :class =>"col-md-4" %>
         <%= f.text_field :second_val,id:'second-val-field-id'%>
       </div>
@@ -63,12 +63,12 @@
 
 
     <div class="actions">
-      <%=text_field_tag :arraylist,params[:arraylist], :style=>"padding:3px;margin-right:0px;display: none;",id:'arraylist'%>
-      <%=text_field_tag :originlist,params[:originlist], :style=>"padding:3px;margin-right:0px;display: none;",id:'originlist'%>
-      <%=text_field_tag :filterlist,params[:filterlist], :style=>"padding:3px;margin-right:0px;display: none;",id:'filterlist'%>
-      <%=text_field_tag :operatorlist,params[:operatorlist], :style=>"padding:3px;margin-right:0px;display: none;",id:'operatorlist'%>
-      <%=text_field_tag :firstvallist,params[:firstvallist], :style=>"padding:3px;margin-right:0px;display: none;",id:'firstvallist'%>
-      <%=text_field_tag :secondvallist,params[:secondvallist], :style=>"padding:3px;margin-right:0px;display: none;",id:'secondvallist'%>
+      <%=text_field_tag :arraylist,params[:arraylist], :style=>"padding:3px;margin-right:0px;",id:'arraylist'%>
+      <%=text_field_tag :originlist,params[:originlist], :style=>"padding:3px;margin-right:0px;",id:'originlist'%>
+      <%=text_field_tag :filterlist,params[:filterlist], :style=>"padding:3px;margin-right:0px;",id:'filterlist'%>
+      <%=text_field_tag :operatorlist,params[:operatorlist], :style=>"padding:3px;margin-right:0px;",id:'operatorlist'%>
+      <%=text_field_tag :firstvallist,params[:firstvallist], :style=>"padding:3px;margin-right:0px;",id:'firstvallist'%>
+      <%=text_field_tag :secondvallist,params[:secondvallist], :style=>"padding:3px;margin-right:0px;",id:'secondvallist'%>
       <%= f.submit class:'btn btn-primary',id:'create-report' %>
       <button class="btn btn-default">Cancel</button>
     </div>
