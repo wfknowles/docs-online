@@ -1,0 +1,114 @@
+<header>
+
+  <% # if @isDashboard != 1 %>
+    <div class="navbar navbar-secondary">
+    <div class="container">
+        <ul class="nav navbar-nav navbar-right">
+        	<% if user_signed_in? %>
+            <li><%= link_to 'Profile', edit_user_registration_path %></li>
+            <li><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' %></li>
+          <% else %>
+            <li><%= link_to 'Sign in', new_user_session_path %></li>
+          <% end %>
+		    </ul>
+
+
+    </div><!-- container -->
+
+</div><!-- navbar -->
+  <% # end  %>
+
+
+  <script>
+      $(document).ready(function() {
+          $("#button-schedule-settings").click(function(){
+              $("#schedule-settings").fadeToggle("slow");
+          });
+          $("#datetimepicker1").click(function(){
+             $("#datetimepicker1").datetimepicker();
+          });
+         
+          $("#datetimepicker2").click(function(){
+                $("#datetimepicker2").datetimepicker();
+          });
+      });
+  </script>
+<div class="navbar navbar-primary">
+	<div class="container">
+      <% # if @isDashboard != 1 %>
+		<div class="navbar-header">
+      <div class="brand">
+        <img src="<%= image_path("logo.svg") %>" height="90" alt="DWC Bug">
+      </div>
+    </div>
+      <% # end  %>
+      <% if @isDashboard == 1 %>
+        <button id="button-schedule-settings">SCHEDULE SETTINGS</button>
+      <% end %>
+        <ul id="" class="nav navbar-nav navbar-right">
+        	<li><%= link_to 'DASHBOARD', dashboard_path %></li>
+            <% unless current_user.try(:user?) %>
+    			<li <% if current_page?('/providers')%>class="active"<%end%>><%= link_to 'PROVIDERS', providers_path %></li>
+    			<li <% if current_page?('/sites')%>class="active"<%end%>><%= link_to 'SITES', sites_path %></li>
+    			<li <% if current_page?('/shifts')%>class="active"<%end%>><%= link_to 'SHIFTS', events_path %></li>
+    			<li><%= link_to 'REPORTS', reports_path %></li>
+          <li><%= link_to 'USERS', users_path %></li>
+          <li><%= link_to 'SETTINGS', page_path('settings') %></li>
+    		<% end %>
+    		</ul>
+
+    </div><!-- container -->
+</div><!-- navbar -->
+
+  <% if @isDashboard == 1 %>
+      <div class="row" id="schedule-settings" style="display: none;">
+        <div class="container">
+          <form action>
+            <div class="heading">
+              <div class="text">Displaying</div>
+              <div class="group">
+                <select class="form-control" id="sell">
+                  <option>All Providers</option>
+                  <%=Provider.all.each do |provider| %>
+                     <option><%=provider.first_name%>&nbsp;<%=provider.last_name%></option>
+                  <% end %>
+                </select>
+              </div>
+              <div class="text">at</div>
+              <div class="group">
+                <select class="form-control" id="sell">
+                  <option>All Sites</option>
+                  <option>Single Site</option>
+                </select>
+              </div>
+              <div class="group">
+                <select class="form-control" id="sell">
+                  <option value="Between">Between</option>
+                  <option value="Before">Before</option>
+                  <option value="After">After</option>
+                </select>
+              </div>
+
+              <div class="group">
+                <div class="input-group date" id="datetimepicker1">
+                  <input type="text" class="form-control">
+              <span class="input-group-addon">
+                     <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+                </div>
+              </div>
+              <div class="group">
+                <div class="input-group date" id="datetimepicker2">
+                  <input type="text" class="form-control">
+              <span class="input-group-addon">
+                     <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+  <% end  %>
+</header>

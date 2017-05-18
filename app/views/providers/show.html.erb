@@ -1,0 +1,749 @@
+<div class="container" style="    margin-top: 15px;">
+  <div class="breadcrumbs"><%= link_to 'Back To Provider Listing', providers_path %></div>
+  <div class="paper-trail">Last Modified by
+        <% if @version.whodunnit && @version.whodunnit != 'Guest' %>
+            <% user = User.find_by_id(@version.whodunnit) %>
+            <% if user %>
+                <%= user.name %>
+            <% end %>
+        <% else %>
+            Guest
+        <% end %>
+        on <%= l(@version.created_at, format: "%m/%-d/%Y") %></div>
+    </div>
+</div>
+<div class="container">
+
+
+
+  <div class="page-header form-group" style="    margin-top: 15px;">
+    <%= link_to 'Edit Record', edit_provider_path(@provider) , :class=>"btn btn-custom pull-right", :style=>"margin-left:10px;"  %> 
+    <!--<%= link_to 'Back', providers_path , :class=>"btn btn-custom pull-right" , :style=>"margin-left:10px;" %>-->
+    <h1><%= @provider.first_name %>
+    <% unless @provider.preferred_name.empty? %>
+      "<%= @provider.preferred_name %>"
+    <% end %>
+    <%= @provider.last_name %>
+  </div>
+
+
+  <div class="form-group">
+
+
+    <div class="info-group row">
+    <div class="col-md-6">
+      <p>
+        <strong>First name:</strong>
+        <%= @provider.first_name %>
+      </p>
+      <p>
+        <strong>Last name:</strong>
+        <%= @provider.last_name %>
+      </p>
+
+
+
+      <p>
+        <strong>Preferred name:</strong>
+        <%= @provider.preferred_name %>
+      </p>
+
+      <p>
+        <strong>Middle Name:</strong>
+        <%= @provider.middle_name %>
+      </p>
+
+      <p>
+        <strong>Salutation:</strong>
+        <%= @provider.salutation %>
+      </p>
+
+
+
+      <div class="form-group">
+        <p>
+          <strong>Address:</strong>
+        </p>
+        <% @provider.address.each do |address| %>
+            <p class="json-field">
+              Type:<%=address.type%>
+            </p>
+
+            <p class="json-field">
+              Street:<%=address.street%>
+            </p>
+
+            <p class="json-field">
+              City:<%=address.city%>
+            </p>
+
+            <p class="json-field">
+              State:<%=address.state%>
+            </p>
+
+            <p class="json-field">
+              Zip:<%=address.zip%>
+            </p>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <p>
+          <strong>Email:</strong>
+        </p>
+        <% @provider.email.each do |email| %>
+            <p class="json-field">
+              Type:<%=email.type%>
+            </p>
+
+            <p class="json-field">
+              Email Address:<%=email.email_address%>
+            </p>
+        <% end %>
+      </div>
+
+
+      <div class="form-group">
+        <p>
+          <strong>Phone number:</strong>
+        </p>
+
+        <% @provider.phone_number.each do |phone_number| %>
+            <p class="json-field">
+              Type:<%=phone_number.type%>
+            </p>
+
+            <p class="json-field">
+              Number:<%=phone_number.number%>
+            </p>
+
+            <p class="json-field">
+              Carrier:<%=phone_number.carrier%>
+            </p>
+        <% end %>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <p>
+        <strong>Status:</strong>
+        <%= @provider.status %>
+      </p>
+
+      <p>
+        <strong>Ssn:</strong>
+        <%= @provider.ssn %>
+      </p>
+
+      <p>
+        <strong>Date of Birth:</strong>
+        <%= Provider.empty_date(@provider.birth_date) %>
+      </p>
+
+      <p>
+        <strong>Gender:</strong>
+        <%= @provider.gender %>
+      </p>
+
+      <p>
+        <strong>Spouse name:</strong>
+        <%= @provider.spouse_name %>
+      </p>
+
+      <p>
+        <strong>Place birth:</strong>
+        <%= @provider.birth_place %>
+      </p>
+
+
+
+      <p>
+        <strong>Superviser:</strong>
+        <%= @provider.superviser %>
+      </p>
+
+
+    </div>
+    </div>
+
+    <div class="info-group row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <p>
+            <strong>CAQH:</strong>
+          </p>
+          <% @provider.caqh.each do |caqh| %>
+              <p class="json-field">
+                Password:<%=caqh.password%>
+              </p>
+
+              <p class="json-field">
+                Login:<%=caqh.login%>
+              </p>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <p>
+            <strong>ATLS:</strong>
+          </p>
+
+          <% @provider.atls.each do |atls| %>
+              <p class="json-field">
+                Issue Date:<%=atls.issue_date%>
+              </p>
+
+              <p class="json-field">
+                Expiration Date:<%=atls.expiration_date%>
+              </p>
+
+              <p class="json-field">
+                State:<%=atls.state%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=atls.url%>
+              </p>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+            <p>
+              <strong>ACLS:</strong>
+            </p>
+
+          <% @provider.acls.each do |acls| %>
+              <p class="json-field">
+                Issue Date:<%=acls.issue_date%>
+              </p>
+
+              <p class="json-field">
+                Expiration Date:<%=acls.expiration_date%>
+              </p>
+
+              <p class="json-field">
+                State:<%=acls.state%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=acls.url%>
+              </p>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+            <p>
+              <strong>PALS:</strong>
+            </p>
+
+          <% @provider.pals.each do |pals| %>
+              <p class="json-field">
+                Issue Date:<%=pals.issue_date%>
+              </p>
+
+              <p class="json-field">
+                Expiration Date:<%=pals.expiration_date%>
+              </p>
+
+              <p class="json-field">
+                State:<%=pals.state%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=pals.url%>
+              </p>
+          <% end %>
+        </div>
+        <div class="form-group">
+            <p>
+              <strong>ALSO:</strong>
+            </p>
+
+          <% @provider.also.each do |also| %>
+              <p class="json-field">
+                Issue Date:<%=also.issue_date%>
+              </p>
+
+              <p class="json-field">
+                Expiration Date:<%=also.expiration_date%>
+              </p>
+
+              <p class="json-field">
+                State:<%=also.state%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=also.url%>
+              </p>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+        <p>
+          <strong>NRP</strong>
+        </p>
+
+          <% @provider.nrp.each do |nrp| %>
+              <p class="json-field">
+                Issue Date:<%=nrp.issue_date%>
+              </p>
+
+              <p class="json-field">
+                Expiration Date:<%=nrp.expiration_date%>
+              </p>
+
+              <p class="json-field">
+                State:<%=nrp.state%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=nrp.url%>
+              </p>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+            <p>
+              <strong>BLS:</strong>
+            </p>
+          <% @provider.bls.each do |bls| %>
+              <p class="json-field">
+                Issue Date:<%=bls.issue_date%>
+              </p>
+
+              <p class="json-field">
+                Expiration Date:<%=bls.expiration_date%>
+              </p>
+
+              <p class="json-field">
+                State:<%=bls.state%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=bls.url%>
+              </p>
+          <% end %>
+      </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <p>
+            <strong>Insurance:</strong>
+          </p>
+
+          <% @provider.insurance.each do |insurance| %>
+              <p class="json-field">
+                Carrier:<%=insurance.carrier%>
+              </p>
+
+              <p class="json-field">
+                Coverage:<%=insurance.coverage%>
+              </p>
+
+              <p class="json-field">
+                Policy Number:<%=insurance.policy_number%>
+              </p>
+
+              <p class="json-field">
+                Expiration:<%=insurance.expiration%>
+              </p>
+
+              <p class="json-field">
+                Carrier Address:<%=insurance.carrier_address%>
+              </p>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <p>
+            <strong>Contract:</strong>
+          </p>
+
+          <% @provider.contract.each do |contract| %>
+              <p class="json-field">
+                Begin Date:<%=contract.begin_date%>
+              </p>
+
+              <p class="json-field">
+                End Date:<%=contract.end_date%>
+              </p>
+
+              <p class="json-field">
+                Signed Date:<%=contract.signed_date%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=contract.signed_date%>
+              </p>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <p>
+            <strong>State Licensure:</strong>
+          </p>
+
+          <% @provider.state_licensure.each do |state_licensure| %>
+              <p class="json-field">
+                Issue Date:<%=state_licensure.issue_date%>
+              </p>
+
+              <p class="json-field">
+                Expiration Date:<%=state_licensure.expiration_date%>
+              </p>
+
+              <p class="json-field">
+                State:<%=state_licensure.state%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=state_licensure.url%>
+              </p>
+
+        <% end %>
+        </div>
+
+        <div class="form-group">
+          <p>
+            <strong>Board Certification:</strong>
+          </p>
+
+          <% @provider.board_certification.each do |board_certification| %>
+              <p class="json-field">
+                ID:<%=board_certification.id%>
+              </p>
+
+              <p class="json-field">
+                Issue Date:<%=board_certification.issue_date%>
+              </p>
+
+              <p class="json-field">
+                Expiration Date:<%=board_certification.expiration_date%>
+              </p>
+
+              <p class="json-field">
+                State:<%=board_certification.state%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=board_certification.url%>
+              </p>
+
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <p>
+            <strong>DEA:</strong>
+          </p>
+
+          <% @provider.dea.each do |dea| %>
+              <p class="json-field">
+                ID:<%=dea.id%>
+              </p>
+
+              <p class="json-field">
+                Issue Date:<%=dea.issue_date%>
+              </p>
+
+              <p class="json-field">
+                Expiration Date:<%=dea.expiration_date%>
+              </p>
+
+              <p class="json-field">
+                State:<%=dea.state%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=dea.url%>
+              </p>
+
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <p>
+            <strong>State Narcotic:</strong>
+          </p>
+
+          <% @provider.state_narcotic.each do |state_narcotic| %>
+              <p class="json-field">
+                ID:<%=state_narcotic.id%>
+              </p>
+
+              <p class="json-field">
+                Issue Date:<%=state_narcotic.issue_date%>
+              </p>
+
+              <p class="json-field">
+                Expiration Date:<%=state_narcotic.expiration_date%>
+              </p>
+
+              <p class="json-field">
+                State:<%=state_narcotic.state%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=state_narcotic.url%>
+              </p>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <p>
+            <strong>Privileges:</strong>
+          </p>
+
+          <% @provider.privileges.each do |privileges| %>
+              <p class="json-field">
+                Title:<%=privileges.title%>
+              </p>
+
+              <p class="json-field">
+                URL:<%=privileges.url%>
+              </p>
+          <% end %>
+        </div>
+        <p>
+          <strong>Staff Contact:</strong>
+          <%= @provider.staff_contact %>
+        </p>
+
+      </div>
+    </div>
+
+ <script>
+        function onAdd(id){
+            $.getScript('/providers/new/?mid='+id, function() {});
+        }
+    </script>
+
+    <div class="info-group row">
+      <h4 class="console-header">Notes</h4>
+      <a id="add-note" class="" onclick="onAdd(<%=@mid %>)"><span class="glyphicon glyphicon-plus"></span>Add Note</a>
+
+         <% @notes.each do |note|%>
+          <div class="note-wrapper">
+            <div><%=note.note%></div>
+            <div class="signature"><%=note.timestamp %> | <i><%=note.author %>,<%=note.category %></i></div>
+          </div>
+      <% end %>
+    </div>
+
+
+
+    <div class="row info-group">
+<p>
+  <strong>Hiredate:</strong>
+  <%if @provider.hire_date!=nil%>
+    <%= @provider.hire_date.to_date %>
+  <% end %>
+</p>
+<p>
+  <strong>Termination date:</strong>
+   <%if @provider.termination_date!=nil%>
+      <%= @provider.termination_date.to_date %>
+    <% end %>
+</p>
+
+      <div class="form-group">
+        <p>
+          <strong>Residency:</strong>
+        </p>
+
+        <% @provider.residency.each do |residency| %>
+            <p class="json-field">
+              Name:<%=residency.name%>
+            </p>
+
+            <p class="json-field">
+              Address:<%=residency.address%>
+            </p>
+
+            <p class="json-field">
+              Focus:<%=residency.focus%>
+            </p>
+
+            <p class="json-field">
+              Start Date:<% if residency.start_date!=nil %><%=residency.start_date.to_date%><% end %>
+            </p>
+
+            <p class="json-field">
+              End Date:<% if residency.end_date!=nil %><%=residency.end_date.to_date%><% end %>
+            </p>
+        <% end %>
+      </div>
+
+
+
+      <div class="form-group">
+        <p>
+          <strong>Medical education:</strong>
+        </p>
+
+        <% @provider.medical_education.each do |medical_education| %>
+            <p class="json-field">
+              Name:<%=medical_education.name%>
+            </p>
+
+            <p class="json-field">
+              Address:<%=medical_education.address%>
+            </p>
+
+            <p class="json-field">
+              Degree:<%=medical_education.degree%>
+            </p>
+
+            <p class="json-field">
+              Dates:<%=medical_education.dates%>
+            </p>
+        <% end %>
+      </div>
+
+
+
+      <div class="form-group">
+        <p>
+          <strong>Pre med education:</strong>
+        </p>
+
+        <% @provider.pre_med_education.each do |pre_med_education| %>
+            <p class="json-field">
+              Name:<%=pre_med_education.name%>
+            </p>
+
+            <p class="json-field">
+              Address:<%=pre_med_education.address%>
+            </p>
+
+            <p class="json-field">
+              Degree:<%=pre_med_education.degree%>
+            </p>
+
+            <p class="json-field">
+              Dates:<%=pre_med_education.dates%>
+            </p>
+        <% end %>
+      </div>
+    </div>
+    <div class="row info-group">
+
+<p>
+  <strong>Initial contact date:</strong>
+  <% if @provider.initial_contact_date!=nil %>
+    <%= @provider.initial_contact_date.to_date %>
+  <% end %>
+</p>
+
+
+<p>
+  <strong>Application received date:</strong>
+  <% if @provider.application_received_date!=nil %>
+    <%= @provider.application_received_date.to_date %>
+  <% end %>
+</p>
+
+
+<p>
+  <strong>Cv received date:</strong>
+   <% if @provider.cv_received_date!=nil %>
+    <%= @provider.cv_received_date.to_date %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Interview date:</strong>
+   <% if @provider.interview_date!=nil %>
+      <%= @provider.interview_date.to_date %>
+    <% end %>
+</p>
+
+<p>
+  <strong>Date verification:</strong>
+  <%= @provider.date_verification %>
+</p>
+
+<p>
+  <strong>Verification completion date:</strong>
+   <% if @provider.verification_completion_date!=nil %>
+    <%= @provider.verification_completion_date.to_date %>
+  <% end %>
+</p>
+
+
+<p>
+  <strong>Recertification request date:</strong>
+  <% if @provider.recertification_request_date!=nil %>
+    <%= @provider.recertification_request_date.to_date %>
+  <% end %>
+</p>
+
+
+<p>
+  <strong>Recertification completion date:</strong>
+  <% if @provider.recertification_completion_date!=nil %>
+    <%= @provider.recertification_completion_date.to_date %>
+  <% end %>
+</p>
+
+
+
+<p>
+  <strong>Active referral options:</strong>
+  <%= @provider.active_referral_options %>
+</p>
+
+
+<p>
+  <strong>Date hired:</strong>
+  <% if @provider.date_hired!=nil %>
+    <%= @provider.date_hired.to_date %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Referredby:</strong>
+  <%= @provider.referred_by %>
+</p>
+
+<p>
+  <strong>First shift date:</strong>
+   <% if @provider.first_shift_date!=nil %>
+    <%= @provider.first_shift_date.to_date %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Referral paid date:</strong>
+  <% if @provider.referral_paid_date!=nil %>
+    <%= @provider.referral_paid_date.to_date %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @provider.amount %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @provider.notepad %>
+</p>
+
+<p>
+  <strong>Referral code:</strong>
+  <%= @provider.referral_code %>
+</p>
+
+
+<p>
+  <strong>Access:</strong>
+  <%= @provider.access_id %>
+</p>
+
+<p>
+  <strong>Microstaffer:</strong>
+  <%= @provider.microstaffer_id %>
+</p>
+</div>
+  </div>
+</div>

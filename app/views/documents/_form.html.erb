@@ -1,0 +1,78 @@
+<%= simple_form_for(@document) do |f| %>
+    <% if document.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(document.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% document.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+    <div class="row info-tab">
+      <span class="title">Input Data</span>
+    </div>
+    <div class="info-group row">
+      <div class="field">
+        <%= f.label :name, :class =>"col-md-4" %>
+        <%= f.text_field :name %>
+      </div>
+      <% if user_signed_in? %>
+          <div class="field"  style="display: none">
+            <%= f.label :creator, :class =>"col-md-4" %>
+            <%= f.text_field :creator ,value:current_user.name %>
+          </div>
+      <% end %>
+
+      <div class="field" style="display: none">
+        <%= f.label :typed, :class =>"col-md-4" %>
+        <%= f.text_field :typed,value: :text ,id:'typed-id'%>
+      </div>
+
+      <p id="para-item"></p>
+      <div class="field">
+
+        <% content_for :javascript do %>
+            <%= tinymce_assets %>
+        <% end %>
+
+        <h3>TinyMCE Editor</h3>
+
+
+
+        <%= text_area_tag :editor, "", :class => "tinymce", :rows => 20, :cols => 60 %>
+
+
+
+        <script type="text/javascript" charset="utf-8">
+            tinyMCE.init({
+                plugins:  "wordcount advlist autolink lists link image charmap print preview anchor searchreplace visualblocks template spellchecker code fullscreen insertdatetime media table contextmenu paste textcolor emoticons",
+                menubar: 'file edit insert view format table tools',
+                toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist indent outdent | link image | paste print preview media template | forecolor backcolor emoticons",
+                mode: 'textareas',
+                oninit : 'loadTemplate'
+            });
+
+        </script>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function(){
+                $("#submit-document").click(function(){
+                    console.log(tinyMCE.activeEditor.getContent());
+                    var content = tinyMCE.activeEditor.getContent();
+                    $("#typed-id").val(content);
+                });
+            });
+
+        </script>
+      </div>
+    </div>
+
+    <%=raw @template %>
+    <div class="actions row info-group">
+      <%= f.submit class:'btn btn-primary' ,id:'submit-document'%>
+    </div>
+
+<% end %>

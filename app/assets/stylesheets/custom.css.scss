@@ -1,0 +1,37 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+    background: #FFFFFF;
+    font-family: 'Lato' , sans-serif;
+    font-size: 14px;
+    color: #333333;
+	text-align: left;
+}
+
+.navbar-primary {background-color: #ebebeb; border-color: #ebebeb; border-radius: 0; text-transform: uppercase;}
+.navbar-primary .nav {padding-top: 28px;}
+.navbar-primary .navbar-nav > li > a {color: #464646; margin: 0 20px; padding: 10px 0; font-weight: 700; font-size: 13px; letter-spacing: 0.7px}
+.navbar-primary .navbar-nav > li.active > a {border-bottom: 2.5px solid #f7d035;}
+.navbar-primary .navbar-nav > li > a:hover {color: #c7c7c7; background-color: #ebebeb; border-bottom: 2.5px solid #c7c7c7;}
+.navbar-primary .navbar-nav > li.active > a:hover {color: #464646; background-color: #ebebeb; border-bottom: 2.5px solid #f7d035;}
+
+.navbar.navbar-secondary { height:40px !important; max-height: 40px !important; min-height: 40px !important; }
+.navbar-secondary {background-color: #464646; border-color: #464646; margin: 0; padding: 0; border-radius: 0; }
+.navbar-secondary .nav {padding: 14px 0}
+.navbar-secondary .navbar-nav > li {border-right: 1px solid #666;}
+.navbar-secondary .navbar-nav > li:last-child {border-right:none;}
+.navbar-secondary .navbar-nav > li > a {line-height: 12px; padding-top: 0; padding-bottom: 0; color: #FFF; margin: 0 5px; font-weight: 300; }
+.navbar-secondary .navbar-nav > li > a:hover {background-color: #464646; color: #FAFAFA;}
+
+.navbar-secondary.scheduling .navbar-nav > li > a {color: #f0f0f0; margin: 0 20px; padding: 0 0 3px 0; font-weight: 700; font-size: 13px; letter-spacing: 0.7px; text-transform: uppercase;}
+.navbar-secondary.scheduling .navbar-nav > li > a:hover {color: #FFFFFF; }
+.navbar-secondary.scheduling .navbar-nav > li {border: none;}
+.navbar-secondary.scheduling .navbar-nav > li.active > a {border-bottom: 2.5px solid #f7d035;}
+
+.listing-header {border-bottom: 2px solid #ddd; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1px; margin-bottom: 2px;}
+.listing-table .row {padding: 8px 0; border-bottom: 1px solid #ddd;}
+.listing-table > .row > div:nth-child(3) > a, .listing-table > .row > div:nth-child(4) > a {color: #333333;}
+
+.json-header {text-align: left;}
+.json-body input, .json-body select {width: 100%; height: 28px;}

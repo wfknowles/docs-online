@@ -1,0 +1,411 @@
+<%= form_for(provider) do |f| %>
+    <% if provider.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(provider.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% provider.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row info-tab">
+      <span class="title">Basic</span>
+    </div>
+    <div class="info-group row">
+      <div class="form-group col-md-6">
+        <div class="field">
+          <%= f.label :first_name, :class =>"col-md-4" %>
+          <%= f.text_field :first_name %>
+        </div>
+        <div class="field">
+          <%= f.label :last_name, :class =>"col-md-4" %>
+          <%= f.text_field :last_name %>
+        </div>
+
+        <div class="field">
+          <%= f.label :preferred_name , :class =>"col-md-4"%>
+          <%= f.text_field :preferred_name %>
+        </div>
+
+        <div class="field">
+          <%= f.label :middle_name , :class =>"col-md-4"%>
+          <%= f.text_field :middle_name %>
+        </div>
+
+        <div class="field">
+          <%= f.label :salutation, :class =>"col-md-4" %>
+          <%= f.select :salutation,[['',''],['Dr','Dr'],['Mr','Mr'],['Mrs','Mrs'],['Dr and Mrs','Dr and Mrs'],['Mr and Mrs','Mr and Mrs']] %>
+        </div>
+
+        <div class="field">
+            <%= f.label :address, :class =>"col-md-12" %>
+          <%=f.fields_for :address do |address_form|%>
+              <%= render 'address_fields' ,f:address_form%>
+          <% end %>
+        </div>
+        
+
+        <div class="field">
+             <%= f.label :email, :class =>"col-md-12" %>
+        <%=f.fields_for :email do |email_form|%>
+              <%= render 'email_fields' ,f:email_form%>
+          <% end %>
+          
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <div class="field">
+          <%= f.label :status , :class =>"col-md-4"%>
+          <%= f.select :status,[['',''],['Active','Active'],['Inactive','Inactive'],['P','P'],['P1','P'],['DQ','DQ'],['S','S']]%>
+        </div>
+
+        <div class="field">
+          <%= f.label :ssn , :class =>"col-md-4"%>
+          <%= f.text_field :ssn %>
+        </div>
+
+        <div class="field">
+          <%= f.label :birth_date , :class =>"col-md-4"%>
+          <%= f.date_select :birth_date, {:include_blank => true, :default => nil} %>
+        </div>
+
+        <div class="field">
+          <%= f.label :gender , :class =>"col-md-4"%>
+          <%= f.select :gender,[['',''],['Male','Male'],['Female','Female']]%>
+        </div>
+
+        <div class="field">
+          <%= f.label :spouse_name , :class =>"col-md-4"%>
+          <%= f.text_field :spouse_name %>
+        </div>
+
+        <div class="field">
+          <%= f.label :birth_place, :class =>"col-md-4" %>
+          <%= f.text_field :birth_place %>
+        </div>
+
+
+
+        <div class="field">
+          <%= f.label :superviser , :class =>"col-md-4"%>
+          <%= f.text_field :superviser %>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="field">
+          <%= f.label :hire_date , :class =>"col-md-4"%>
+          <%= f.date_select :hire_date, {:include_blank => true, :default => nil} %>
+        </div>
+        <div class="clearfix"></div>
+        <div class="field">
+          <%= f.label :termination_date, :class =>"col-md-4" %>
+          <%= f.date_select :termination_date, {:include_blank => true, :default => nil} %>
+        </div>
+        <div class="field">
+          <%= f.label :phone_number, :class =>"col-md-12", :style=>"margin-top: 45px;"%>
+          <%=f.fields_for :phone_number do |phone_number_form|%>
+              <%= render 'phone_number_fields' ,f:phone_number_form %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row info-tab">
+      <span class="title">Provider Info</span>
+    </div>
+
+    <div class="info-group row">
+      <div class="form-group col-md-6">
+        <div class="field">
+          <%= f.label :provider_type, :class =>"col-md-4" %>
+          <%=f.text_field :provider_type %>
+        </div>
+        <div class="field">
+          <%= f.label :misc_info, :class =>"col-md-4" %>
+          <%=f.text_field :misc_info %>
+        </div>
+
+        <div class="field">
+          <%= f.label :ecfmg, :class =>"col-md-4" %>
+          <%=f.text_field :ecfmg %>
+        </div>
+
+        <div class="field">
+          <%= f.label :staff_contact, :class =>"col-md-4" %>
+          <%=f.text_field :staff_contact %>
+          </div>
+          <div class="field">
+            <%= f.label :insurance, :class =>"col-md-12" %>
+            <%=f.fields_for :insurance do |insurance_form|%>
+                <%= render 'insurance_fields' ,f:insurance_form%>
+            <% end %>
+          </div>
+
+          <div class="field">
+            <%= f.label :contract, :class =>"col-md-12" %>
+            <%=f.fields_for :contract do |contract_form|%>
+                <%= render 'contract_fields' ,f:contract_form%>
+            <% end %>
+          </div>
+
+          <div class="field">
+            <%= f.label :acls, :class =>"col-md-12" %>
+            <%=f.fields_for :acls do |acls_form|%>
+                <%= render 'acls_fields' ,f:acls_form%>
+            <% end %>
+          </div>
+
+          <div class="field">
+            <div class="row">
+                <%= f.label :pals, :class =>"col-md-4" %>
+          </div>
+            <%=f.fields_for :pals do |pals_form|%>
+                <%= render 'pals_fields' ,f:pals_form%>
+            <% end %>
+          </div>
+
+          <div class="field">
+            <%= f.label :also, :class =>"col-md-12" %>
+            <%=f.fields_for :also do |also_form|%>
+                <%= render 'also_fields' ,f:also_form%>
+            <% end %>
+          </div>
+
+          <div class="field">
+            <%= f.label :nrp, :class =>"col-md-12" %>
+            <%=f.fields_for :nrp do |nrp_form|%>
+                <%= render 'nrp_fields' ,f:nrp_form%>
+            <% end %>
+          </div>
+
+          <div class="field">
+            <%= f.label :bls, :class =>"col-md-12" %>
+            <%=f.fields_for :bls do |bls_form|%>
+                <%= render 'bls_fields' ,f:bls_form%>
+            <% end %>
+          </div>
+
+
+        </div>
+
+        <div class="form-group col-md-6">
+          <div class="field">
+            <%= f.label :provider_skills, :class =>"col-md-4" %>
+            <%=f.text_field :provider_skills %>
+          </div>
+
+          <div class="field">
+            <%= f.label :medicare, :class =>"col-md-4" %>
+            <%=f.text_field :medicare %>
+        </div>
+            <div class="field">
+              <%= f.label :medicaid, :class =>"col-md-4" %>
+              <%=f.text_field :medicaid %>
+            </div>
+
+            <div class="field">
+              <%= f.label :npi, :class =>"col-md-4" %>
+              <%=f.text_field :npi %>
+            </div>
+
+            <div class="field">
+              <%= f.label :caqh, :class =>"col-md-12" %>
+              <%=f.fields_for :caqh do |caqh_form|%>
+                  <%= render 'caqh_fields' ,f:caqh_form%>
+              <% end %>
+            </div>
+
+            <div class="field">
+              <%= f.label :atls, :class =>"col-md-12" %>
+              <%=f.fields_for :atls do |atls_form|%>
+                  <%= render 'atls_fields' ,f:atls_form%>
+              <% end %>
+            </div>
+
+            <div class="field">
+              <%= f.label :privileges, :class =>"col-md-12" %>
+              <%=f.fields_for :privileges do |privileges_form|%>
+                  <%= render 'privileges_fields' ,f:privileges_form%>
+              <% end %>
+            </div>
+
+            <div class="field">
+              <%= f.label :state_licensure, :class =>"col-md-12" %>
+              <%=f.fields_for :state_licensure do |state_licensure_form|%>
+                  <%= render 'state_licensure_fields' ,f:state_licensure_form%>
+              <% end %>
+            </div>
+
+            <div class="field">
+              <%= f.label :state_narcotic, :class =>"col-md-12" %>
+              <%=f.fields_for :state_narcotic do |state_narcotic_form|%>
+                  <%= render 'state_narcotic_fields' ,f:state_narcotic_form%>
+              <% end %>
+            </div>
+
+            <div class="field">
+              <%= f.label :dea, :class =>"col-md-12" %>
+              <%=f.fields_for :dea do |dea_form|%>
+                  <%= render 'dea_fields' ,f:dea_form%>
+              <% end %>
+            </div>
+            <div class="field">
+              <%= f.label :board_certification, :class =>"col-md-12" %>
+              <%=f.fields_for :board_certification do |board_certification_form|%>
+                  <%= render 'board_certification_fields' ,f:board_certification_form%>
+              <% end %>
+            </div>
+
+          </div>
+
+
+          </div>
+      <div class="row info-tab">
+        <span class="title">Regidency</span>
+      </div>
+
+      <div class="info-group row">
+        <div class="form-group col-md-12" >
+          <div class="field">
+            <%=f.fields_for :residency do |residency_form|%>
+                <%= render 'residency_fields' ,f:residency_form%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+          <div class="row info-tab">
+            <span class="title">Education</span>
+          </div>
+
+          <div class="row info-group">
+            <div class="form-group col-md-12">
+              <div class="field">
+                <%= f.label :medical_education, :class =>"col-md-12" %>
+                <%=f.fields_for :medical_education do |medical_education_form|%>
+                    <%= render 'medical_education_fields' ,f:medical_education_form%>
+                <% end %>
+              </div>
+
+              <div class="field">
+                <%= f.label :pre_med_education, :class =>"col-md-12" %>
+                <%=f.fields_for :pre_med_education do |pre_med_education_form|%>
+                    <%= render 'pre_med_education_fields' ,f:pre_med_education_form%>
+                <% end %>
+              </div>
+
+
+              <div class="clearfix"></div>
+              <div class="field">
+                <%= f.label :initial_contact_date, :class =>"col-md-4" %>
+                <%= f.date_select :initial_contact_date, :class =>"col-md-8" %>
+              </div>
+              <div class="clearfix"></div>
+              <div class="field">
+                <%= f.label :application_received_date, :class =>"col-md-4" %>
+                <%= f.date_select :application_received_date, :class =>"col-md-8" %>
+              </div>
+              <div class="clearfix"></div>
+              <div class="field">
+                <%= f.label :cv_received_date, :class =>"col-md-4" %>
+                <%= f.date_select :cv_received_date %>
+              </div>
+              <div class="clearfix"></div>
+              <div class="field">
+                <%= f.label :interview_date, :class =>"col-md-4" %>
+                <%= f.date_select :interview_date %>
+              </div>
+            </div>
+          </div>
+          <div class="row info-tab">
+            <span class="title">Verification</span>
+          </div>
+          <div class="row info-group">
+            <div class="form-group col-md-12">
+              <div class="field">
+                <%= f.label :date_verification, :class =>"col-md-4" %>
+                <%= f.text_field :date_verification %>
+              </div>
+
+              <div class="field">
+                <%= f.label :verification_completion_date, :class =>"col-md-4" %>
+                <%= f.date_select :verification_completion_date %>
+              </div>
+              <div class="clearfix"></div>
+              <div class="field">
+                <%= f.label :recertification_request_date, :class =>"col-md-4" %>
+                <%= f.date_select :recertification_request_date %>
+              </div>
+              <div class="clearfix"></div>
+              <div class="field">
+                <%= f.label :recertification_completion_date, :class =>"col-md-4" %>
+                <%= f.date_select :recertification_completion_date %>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="field">
+                <%= f.label :active_referral_options, :class =>"col-md-4" %>
+                <%= f.text_field :active_referral_options %>
+              </div>
+              <div class="clearfix"></div>
+              <div class="field">
+                <%= f.label :date_hired, :class =>"col-md-4" %>
+                <%= f.date_select :date_hired %>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="field">
+                <%= f.label :referred_by, :class =>"col-md-4" %>
+                <%= f.text_field :referred_by %>
+              </div>
+              <div class="clearfix"></div>
+              <div class="field">
+                <%= f.label :first_shift_date, :class =>"col-md-4" %>
+                <%= f.date_select :first_shift_date %>
+              </div>
+              <div class="clearfix"></div>
+              <div class="field">
+                <%= f.label :referral_paid_date, :class =>"col-md-4" %>
+                <%= f.date_select :referral_paid_date %>
+              </div>
+              <div class="clearfix"></div>
+              <div class="field">
+                <%= f.label :amount, :class =>"col-md-4" %>
+                <%= f.number_field :amount %>
+              </div>
+
+              <div class="field">
+                <%= f.label :notepad , :class =>"col-md-4"%>
+                <%= f.text_field :notepad %>
+              </div>
+
+              <div class="field">
+                <%= f.label :referral_code , :class =>"col-md-4"%>
+                <%= f.text_field :referral_code %>
+              </div>
+
+
+              <div class="field">
+                <%= f.label :access_id , :class =>"col-md-4"%>
+                <%= f.text_field :access_id %>
+              </div>
+
+              <div class="field">
+                <%= f.label :microstaffer_id, :class =>"col-md-4" %>
+                <%= f.text_field :microstaffer_id %>
+              </div>
+
+            </div> </div>
+
+          <div class="actions row info-group">
+            <%= f.submit class:'btn btn-primary' %>
+<% end %>
+</div>
+</div>
+</div>
+</div>

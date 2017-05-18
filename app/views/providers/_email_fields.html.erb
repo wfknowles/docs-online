@@ -1,0 +1,12 @@
+<div class="json-header col-md-12">
+    <%= f.label :type, :class => "col-md-3" %>
+    <%= f.label :email_address, :class => "col-md-7" %>
+</div>
+<div class="json-body col-md-12">
+  <div class="row col-md-12">
+    <div class="col-md-3"><%= f.select :type, [['Primary','primary'],['Home','home'],['Work','work'],['Alternate','alternate']] %></div>
+    <div class="col-md-7"><%= f.text_field :email_address, placeholder: "Email Address" %></div>
+    <a class="col-md-1 glyphicon glyphicon-plus"></a>
+    <%= f.hidden_field :_destroy %>
+  </div>
+</div>

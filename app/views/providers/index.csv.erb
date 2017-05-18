@@ -1,0 +1,9 @@
+<%- headers = @addcolumns -%>
+<%= CSV.generate_line headers %>
+<%- @providers.each do |provider| -%>
+    <%-  columns = [] -%>
+         <%- @addcolumns.each do |addcol| -%>
+           <%- columns.push provider[addcol]-%>
+        <%- end -%>
+    <%= CSV.generate_line(columns) -%>
+<%- end -%>

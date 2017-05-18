@@ -1,0 +1,14 @@
+<div class="container">
+<div class="page-header form-group">
+  <%= link_to 'Show', @provider, :class=>"btn btn-custom pull-right" , :style=>"margin-left:10px;" %> <%= link_to 'Back', providers_path , :class=>"btn btn-custom pull-right" %>
+  <h3>Editing <%= @provider.first_name%> <%= @provider.last_name%></h3>
+</div>
+
+<div class="form-group">
+<%= render 'form',provider:@provider %>
+</div>
+</div>
+
+
+
+

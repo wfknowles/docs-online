@@ -1,0 +1,629 @@
+<div class="container">
+  <div class="form-group">
+   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag :application %>
+    <%= javascript_include_tag 'report_new'%>
+    <%= link_to 'Back', reports_path, :class=>"btn btn-custom pull-right" %>
+    <h3>Edit Report</h3>
+  </div>
+  <div class="div-1">
+    <div class=" page-header form-group">
+        <span><h4>1. Basic Information</h4></span>
+    </div>
+    <div class="info-group">
+    
+      <div class=" form-group">
+          <span>Title:</span>
+      </div>
+      <div class="form-group">
+          <input id="report_name_id" type="text" class="form-control" placeholder="New Report" value="<%=@report.name %>">
+      </div>
+        
+      <div class=" form-group">
+          <span>Module:</span>
+      </div>
+      <div class="form-group">
+        <%= select_tag  :select_name ,options_for_select(@modeltable.collect{|u|[u.name,u.name]},@report.module),:class=>"form-control" ,:id=>"select_module_id"%>
+      </div>
+      
+      <div class=" form-group">
+          <span>Report Type:</span>
+      </div>
+      <div class="form-group">
+        <select class="form-control" id="select-table-type">
+          <option value="Table" <%if @report.typed=="Table"%> selected <% end %>>Tabular Report</option>
+          <option value="Summary" <%if @report.typed=="Summary" %>selected <% end %>>Summary Report</option>
+          <option value="Matrix" <%if @report.typed=="Matrix" %> selected<% end %>>Matrix Report</option>
+        </select>
+      </div>
+      
+      <div class="form-group reportImage cB">
+      </div>
+  
+      <div class="form-group">
+        <p id="para-report-type">Tabular reports provide you the way to list your data in a simpler form.</p>
+      </div>
+
+    </div>
+  </div>
+
+
+<!--  <%= select_tag  :select_name ,options_for_select(@modeltable.collect{|u|[u.name,u.name]}),:class=>"form-control" %>-->
+
+
+
+<div id="div-2">
+    <div>
+      <div class=" page-header form-group">
+        <span><h4>2. Report Represention</h4></span>
+      </div>
+    </div>
+
+    <div class="info-group" >
+      <div class=" form-group">
+       <table border="0" align="center" cellpadding="0" cellspacing="2">
+         <tbody>
+            <tr>
+              <td>Available Columns</td>
+              <td>&nbsp;</td>
+              <td>Selected Columns</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>
+
+                <select  id="availList_site" name="availList_site" multiple="" class="select" style="width:200px;height:300px;max-height:300px;overflow: auto;">
+                  <optgroup  label="Site" class="select" style="border:none;" id="available-title-id-3">
+
+                      <% Site.column_names.each do |column_name| %>
+                          <option><%= column_name.titlecase %></option>
+                      <% end %>
+
+               </optgroup></select>
+
+
+                <!-- <select id="availList_site_show" name="availList_site_show" multiple="" class="select"  style="width:200px;height:300px;max-height:300px;overflow: auto;">
+                  <optgroup  label="Site" class="select" style="border:none;" id="available-title-id-3">
+                    <option>ID</option>
+                    <option>Hospital Name</option>
+                    <option>Address</option>
+                    <option>City</option>
+                    <option>Phone Number</option>
+                    <option>Fax Number</option>
+                    <option>Po Box</option>
+                    <option>Contacts</option>
+                    <option>Certification Requirements</option>
+                    <option>Notepad</option>
+                    <option>Housing Info</option>
+                    <option>Status Options</option>
+                    <option>DWC Contact Staff</option>
+                    <option>Affiliation</option>
+                    <option>Billing Address</option>
+                    <option>Access ID</option>
+                    <option>Microstaffer ID</option>
+                    <option>Created At</option>
+                    <option>Updated At</option>
+                  </optgroup></select> -->
+
+
+
+                <select  id="availList_shift" name="availList_shift" multiple="" class="select" style="width:200px;height:300px;max-height:300px;overflow: auto;">
+                  <optgroup label="Shift" class="select" style="border:none;" id="available-title-id-1">
+
+                     <% Event.column_names.each do |column_name| %>
+                          <option><%= column_name.titlecase %></option>
+                      <% end %>
+
+                </optgroup></select>
+
+
+                <!-- <select id="availList_shift_show" name="availList_shift_show" multiple="" class="select"  style="width:200px;height:300px;max-height:300px;overflow: auto;">
+                  <optgroup  label="Shift" class="select" style="border:none;" id="available-title-id-3">
+                    <option>ID</option>
+                    <option>Provider Name</option>
+                    <option>Site Name</option>
+                    <option>Shift</option>
+                    <option>Start Time</option>
+                    <option>End Time</option>
+                    <option>Status</option>
+                    <option>Hide From Schedule</option>
+                    <option>Custom Pay Rate</option>
+                    <option>Custom Bill Rate</option>
+                    <option>Area</option>
+                    <option>Notes</option>
+                    <option>Filled On</option>
+                    <option>Access ID</option>
+                    <option>Updated by</option>
+                    <option>Color</option>
+                    <option>Created At</option>
+                    <option>Updated At</option>
+                  </optgroup></select> -->
+
+
+
+
+                <select id="availList_provider" name="availList_provider" multiple="" class="select" style="width:200px;height:300px;max-height:300px;overflow: auto;">
+                  <optgroup label="Provider" class="select" style="border:none;" id="available-title-id-2">
+
+                  <% Provider.column_names.each do |column_name| %>
+                      <option><%= column_name.titlecase %></option>
+                  <% end %>
+
+                </optgroup></select>
+
+
+                <!-- <select id="availList_provider_show" name="availList_provider_show" multiple="" class="select"  style="width:200px;height:300px;max-height:300px;overflow: auto;">
+                  <optgroup  label="Provider" class="select" style="border:none;" id="available-title-id-3">
+                    <option>ID</option>
+                    <option>Rails</option>
+                    <option>Last Name</option>
+                    <option>First Name</option>
+                    <option>Preferred Name</option>
+                    <option>Middle Name</option>
+                    <option>Salutation</option>
+                    <option>Address</option>
+                    <option>Email</option>
+                    <option>Phone Number</option>
+                    <option>Status</option>
+                    <option>SSN</option>
+                    <option>Birth Date</option>
+                    <option>Gender</option>
+                    <option>Spouse Name</option>
+                    <option>Birth Place</option>
+                    <option>Superviser</option>
+                    <option>Hire Date</option>
+                    <option>Termination Date</option>
+                    <option>Provider Type</option>
+                    <option>Provider Skills</option>
+                    <option>Misc Info</option>
+                    <option>Insurance</option>
+                    <option>Contract</option>
+                    <option>Ecfmg</option>
+                    <option>Medicare</option>
+                    <option>Medicaid</option>
+                    <option>NPI</option>
+                    <option>CAQH</option>
+                    <option>ATLS</option>
+                    <option>ACLS</option>
+                    <option>PALS</option>
+                    <option>ALSO</option>
+                    <option>NRP</option>
+                    <option>BLS</option>
+                    <option>State Licensure</option>
+                    <option>Board Certification</option>
+                    <option>DEA</option>
+                    <option>State Narcoitc</option>
+                    <option>Staff Contact</option>
+                    <option>Privileges</option>
+                    <option>Residency</option>
+                    <option>Medical Education</option>
+                    <option>Pre Medical Education</option>
+                    <option>Initial Contact Date</option>
+                    <option>Application Received Date</option>
+                    <option>CV Received Date</option>
+                    <option>Interview Date</option>
+                    <option>Verification Date</option>
+                    <option>Verification Completion Date</option>
+                    <option>Recertification Request Date</option>
+                    <option>Recertification Completion Date</option>
+                    <option>Active Referral Options</option>
+                    <option>Hired Date</option>
+                    <option>ReferredBy</option>
+                    <option>First Shift Date</option>
+                    <option>Referral Paid Date</option>
+                    <option>Amount</option>
+                    <option>Notepad</option>
+                    <option>Referral Code</option>
+                    <option>Access ID</option>
+                    <option>Microstaffer ID</option>
+                    <option>Created At</option>
+                    <option>Updated At</option>
+                  </optgroup></select> -->
+
+
+              </td>
+              <td> <table border="0" align="center" cellpadding="0" cellspacing="5">
+                <tbody>
+                    <tr>
+                        <td>
+                          <div align="center">
+                            <input type="button" name="Button" value="Add" class="primarybtn btn btn-primary" data-zcqa="repAddColumns" id="button-add-column">
+                          </div>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+              </td>
+              <td> <select id="selectedColumns" name="selectedColumns" multiple="" class="select" style="width:200px;height:300px">
+                
+              <% @representation_array.each do |item|%>
+                <option>
+                  <%if @report.module=="Provider"%>
+                      <%if item=='id'%>ID<% end %>
+                      <%if item=='rails'%>Rails<% end %>
+                      <%if item=='last_name'%>Last Name<% end %>
+                      <%if item=='first_name'%>First Name<% end %>
+                      <%if item=='preferred_name'%>Preferred Name<% end %>
+                      <%if item=='middle_name'%>Middle Name<% end %>
+                      <%if item=='salutation'%>Salutation<% end %>
+                      <%if item=='address'%>Address<% end %>
+                      <%if item=='email'%>Email<% end %>
+                      <%if item=='phone_number'%>Phone Number<% end %>
+                      <%if item=='status'%>Status<% end %>
+                      <%if item=='ssn'%>SSN<% end %>
+                      <%if item=='birth_date'%>Birth Date<% end %>
+                      <%if item=='gender'%>Gender<% end %>
+                      <%if item=='spouse_name'%>Spouse Name<% end %>
+                      <%if item=='birth_place'%>Birth Place<% end %>
+                      <%if item=='superviser'%>Superviser<% end %>
+                      <%if item=='hire_date'%>Hire Date<% end %>
+                      <%if item=='termination_date'%>Termination Date<% end %>
+                      <%if item=='provider_type'%>Provider Type<% end %>
+                      <%if item=='provider_skills'%>Provider Skills<% end %>
+                      <%if item=='misc_info'%>Misc Info<% end %>
+                      <%if item=='insurance'%>Insurance<% end %>
+                      <%if item=='contract'%>Contract<% end %>
+                      <%if item=='ecfmg'%>Ecfmg<% end %>
+                      <%if item=='medicare'%>Medicare<% end %>
+                      <%if item=='medicaid'%>Medicaid<% end %>
+                      <%if item=='npi'%>NPI<% end %>
+                      <%if item=='caqh'%>CAQH<% end %>
+                      <%if item=='atls'%>ATLS<% end %>
+                      <%if item=='acls'%>ACLS<% end %>
+                      <%if item=='pals'%>PALS<% end %>
+                      <%if item=='also'%>ALSO<% end %>
+                      <%if item=='nrp'%>NRP<% end %>
+                      <%if item=='bls'%>BLS<% end %>
+                      <%if item=='state_licensure'%>State Licensure<% end %>
+                      <%if item=='board_certification'%>Board Certification<% end %>
+                      <%if item=='dea'%>DEA<% end %>
+                      <%if item=='state_narcotic'%>State Narcoitc<% end %>
+                      <%if item=='staff_contact'%>Staff Contact<% end %>
+                      <%if item=='privileges'%>Privileges<% end %>
+                      <%if item=='residency'%>Residency<% end %>
+                      <%if item=='medical_education'%>Medical Education<% end %>
+                      <%if item=='pre_med_education'%>Pre Medical Education<% end %>
+                      <%if item=='initial_contact_date'%>Initial Contact Date<% end %>
+                      <%if item=='application_received_date'%>Application Received Date<% end %>
+                      <%if item=='cv_received_date'%>CV Received Date<% end %>
+                      <%if item=='interview_date'%>Interview Date<% end %>
+                      <%if item=='date_verification'%>Verification Date<% end %>
+                      <%if item=='verification_completion_date'%>Verification Completion Date<% end %>
+                      <%if item=='recertification_request_date'%>Recertification Request Date<% end %>
+                      <%if item=='recertification_completion_date'%>Recertification Completion Date<% end %>
+                      <%if item=='active_referral_options'%>Active Referral Options<% end %>
+                      <%if item=='date_hired'%>Hired Date<% end %>
+                      <%if item=='referred_by'%>ReferredBy<% end %>
+                      <%if item=='first_shift_date'%>First Shift Date<% end %>
+                      <%if item=='referral_paid_date'%>Referral Paid Date<% end %>
+                      <%if item=='amount'%>Amount<% end %>
+                      <%if item=='notepad'%>Notepad<% end %>
+                      <%if item=='referral_code'%>Referral Code<% end %>
+                      <%if item=='access_id'%>Access ID<% end %>
+                      <%if item=='microstaffer_id'%>Microstaffer ID<% end %>
+                      <%if item=='created_at'%>Created At<% end %>
+                      <%if item=='updated_at'%>Updated At<% end %>
+                  <% end %>
+                  <%if @report.module=="Shift"%>
+                      <%if item=='id'%>ID<% end %>
+                      <%if item=='provider_id'%>Provider Name<% end %>
+                      <%if item=='site_id'%>Site Name<% end %>
+                      <%if item=='title'%>Shift<% end %>
+                      <%if item=='start'%>Start Time<% end %>
+                      <%if item=='end'%>End Time<% end %>
+                      <%if item=='status'%>Status<% end %>
+                      <%if item=='hide_from_schedule'%>Hide From Schedule<% end %>
+                      <%if item=='custom_pay_rate'%>Custom Pay Rate<% end %>
+                      <%if item=='custom_bill_rate'%>Custom Bill Rate<% end %>
+                      <%if item=='area'%>Area<% end %>
+                      <%if item=='notes'%>Notes<% end %>
+                      <%if item=='filled_on'%>Filled On<% end %>
+                      <%if item=='access_id'%>Access ID<% end %>
+                      <%if item=='updated_by'%>Updated by<% end %>
+                      <%if item=='color'%>Color<% end %>
+                      <%if item=='created_at'%>Created At<% end %>
+                      <%if item=='updated_at'%>Updated At<% end %>
+                  <% end %>
+
+                  <%if @report.module=="Site"%>
+                      <%if item=='id'%>ID<% end %>
+                      <%if item=='hospital_name'%>Hospital Name<% end %>
+                      <%if item=='address'%>Address<% end %>
+                      <%if item=='city'%>City<% end %>
+                      <%if item=='phone_number'%>Phone Number<% end %>
+                      <%if item=='fax_number'%>Fax Number<% end %>
+                      <%if item=='po_box'%>Po Box<% end %>
+                      <%if item=='contacts'%>Notepad<% end %>
+                      <%if item=='certification_requirements'%>Notepad<% end %>
+                      <%if item=='notepad'%>Notepad<% end %>
+                      <%if item=='housing_info'%>Housing Info<% end %>
+                      <%if item=='status_options'%>Status Options<% end %>
+                      <%if item=='dwc_contact_staff'%>DWC Contact Staff<% end %>
+                      <%if item=='affiliation'%>Affiliation<% end %>
+                      <%if item=='billing_address'%>Billing Address<% end %>
+                      <%if item=='access_id'%>Access ID<% end %>
+                      <%if item=='microstaffer_id'%>Microstaffer ID<% end %>
+                      <%if item=='created_at'%>Created At<% end %>
+                      <%if item=='updated_at'%>Updated At<% end %>
+                  <% end %>
+                </option>
+              <% end %> 
+              </select></td>
+
+              <td>
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                  <tr>
+                    <td>
+                      <a id="moveup_link" href="javascript:;" title="Move Up" style="display: block;">
+                        <img id="move_up_id" src="//img.zohostatic.com/crm/1094781/images/spacer.gif" width="24" height="24" class="movecol_up" alt="Move Up" name="Image3" border="0" align="absmiddle">
+                     </a>
+                      <img id="moveup_disabled" src="//img.zohostatic.com/crm/1094781/images/spacer.gif" width="24" height="24" class="movecol_up_disabled" style="display:none">
+                </td>
+                </tr>
+                  <tr>
+                    <td>
+                      <a id="movedown_link" href="javascript:;" title="Move Down" style="display: block;">
+                        <img id="move_down_id" src="//img.zohostatic.com/crm/1094781/images/spacer.gif" width="24" height="24" class="movecol_down" alt="Move Down" name="Image4" border="0" align="absMiddle">
+                      </a>
+                      <img id="movedown_disabled" src="//img.zohostatic.com/crm/1094781/images/spacer.gif" width="24" height="24" class="movecol_down_disabled" style="display:none">
+                    </td>
+                  </tr>
+                  <tr style="height:5px">
+                    <td>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                    <a href="javascript:;" title="Delete">
+                      <img id="movecol_del_id" src="//img.zohostatic.com/crm/1094781/images/spacer.gif" width="24" height="24" class="movecol_del" alt="Delete" name="Image2" border="0" align="absMiddle" >
+                    </a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+         </tbody>
+       </table>
+      </div>
+    </div>
+  </div>
+
+
+
+<div id="div-3">
+  <div>
+    <div class=" page-header form-group">
+      <span><h4>3. Filters</h4></span>
+    </div>
+  </div>
+
+  <div class="info-group">
+
+    <div class="form-group">
+      <table id="searchlayer" border="0" cellpadding="0" cellspacing="0" >
+        <tbody id="tblCustomers">
+        <tr id="searchcriteria-1">
+          <td style="padding-top: 10px;">
+            <div class="wf_slideDownUp_Div tr_cnt_1" style="opacity: 1;height: auto;overflow: visible">
+              <span>
+                 <input id="patternNum_1" type="text" class="searchMatchText" readonly="readonly" name="patternNum1" value="1">
+              </span>
+              <input type="hidden" name="match-1" id="match-1">
+            </div>
+          </td>
+          <td style="padding-top: 10px;">
+            <div class="wf_slideDownUp_Div tr_cnt_1" style="opacity: 1;height: auto;overflow: visible">
+              <select  id="filterList_shift" name="filterList_shift" class="select form-control" style="width:200px;max-height:80px;overflow: auto;margin-left: 7px;">
+               <% Event.column_names.each do |column_name| %>
+                      <option><%= column_name.titlecase %></option>
+                  <% end %>
+              </select>
+
+                <!-- <select id="filterList_site_show_1" name="filterList_site_show_1" onchange="filterSite1()" class="select form-control"  style="width:200px;max-height:50px;overflow: auto;margin-left: 7px;">
+                  <option>ID</option>
+                  <option>Hospital Name</option>
+                  <option>Address</option>
+                  <option>City</option>
+                  <option>Phone Number</option>
+                  <option>Fax Number</option>
+                  <option>Po Box</option>
+                  <option>Contacts</option>
+                  <option>Certification Requirements</option>
+                  <option>Notepad</option>
+                  <option>Housing Info</option>
+                  <option>Status Options</option>
+                  <option>DWC Contact Staff</option>
+                  <option>Affiliation</option>
+                  <option>Billing Address</option>
+                  <option>Access ID</option>
+                  <option>Microstaffer ID</option>
+                  <option>Created At</option>
+                  <option>Updated At</option>
+                  </select> -->
+
+
+              <select  id="filterList_site" name="filterList_site"  class="select form-control" style="width:200px;max-height:80px;overflow: auto;margin-left: 7px;">
+                <% Site.column_names.each do |column_name| %>
+                    <option><%= column_name.titlecase %></option>
+                <% end %>
+              </select>
+
+                <!-- <select id="filterList_shift_show_1" name="filterList_shift_show_1" onchange="filterShift1()" class="select form-control"  style="width:200px;max-height:50px;overflow: auto;margin-left: 7px;">
+                  <option>ID</option>
+                  <option>Provider Name</option>
+                  <option>Site Name</option>
+                  <option>Shift</option>
+                  <option>Start Time</option>
+                  <option>End Time</option>
+                  <option>Status</option>
+                  <option>Hide From Schedule</option>
+                  <option>Custom Pay Rate</option>
+                  <option>Custom Bill Rate</option>
+                  <option>Area</option>
+                  <option>Notes</option>
+                  <option>Filled On</option>
+                  <option>Access ID</option>
+                  <option>Updated by</option>
+                  <option>Color</option>
+                  <option>Created At</option>
+                  <option>Updated At</option>
+                 </select> -->
+
+
+              <select id="provider_type_select" style="display: none;">
+                <% Provider.column_names.each do |column_name|%>
+                    <option><%=Provider.columns_hash[column_name].type%></option>
+                <% end %>
+              </select>
+
+              <select id="site_type_select" style="display: none;">
+                <% Site.column_names.each do |column_name|%>
+                    <option><%=Site.columns_hash[column_name].type%></option>
+                <% end %>
+              </select>
+
+
+              <select id="shift_type_select" style="display: none;">
+                <% Event.column_names.each do |column_name|%>
+                    <option><%=Event.columns_hash[column_name].type%></option>
+                <% end %>
+              </select>
+
+
+              <select  id="filterList_provider" name="filterList_provider"  class="select form-control" style="width:200px;max-height:50px;overflow: auto;margin-left: 7px;">
+                <% Provider.column_names.each do |column_name| %>
+                    <option><%= column_name.titlecase %></option>
+                <% end %>
+
+              </select>
+
+                <!-- <select id="filterList_provider_show_1" name="filterList_provider_show"  class="select form-control" onchange="filterProvider1()" style="width:200px;max-height:50px;overflow: auto;margin-left: 7px;">
+                  <option>ID</option>
+                  <option>Rails</option>
+                  <option>Last Name</option>
+                  <option>First Name</option>
+                  <option>Preferred Name</option>
+                  <option>Middle Name</option>
+                  <option>Salutation</option>
+                  <option>Address</option>
+                  <option>Email</option>
+                  <option>Phone Number</option>
+                  <option>Status</option>
+                  <option>SSN</option>
+                  <option>Birth Date</option>
+                  <option>Gender</option>
+                  <option>Spouse Name</option>
+                  <option>Birth Place</option>
+                  <option>Superviser</option>
+                  <option>Hire Date</option>
+                  <option>Termination Date</option>
+                  <option>Provider Type</option>
+                  <option>Provider Skills</option>
+                  <option>Misc Info</option>
+                  <option>Insurance</option>
+                  <option>Contract</option>
+                  <option>Ecfmg</option>
+                  <option>Medicare</option>
+                  <option>Medicaid</option>
+                  <option>NPI</option>
+                  <option>CAQH</option>
+                  <option>ATLS</option>
+                  <option>ACLS</option>
+                  <option>PALS</option>
+                  <option>ALSO</option>
+                  <option>NRP</option>
+                  <option>BLS</option>
+                  <option>State Licensure</option>
+                  <option>Board Certification</option>
+                  <option>DEA</option>
+                  <option>State Narcoitc</option>
+                  <option>Staff Contact</option>
+                  <option>Privileges</option>
+                  <option>Residency</option>
+                  <option>Medical Education</option>
+                  <option>Pre Medical Education</option>
+                  <option>Initial Contact Date</option>
+                  <option>Application Received Date</option>
+                  <option>CV Received Date</option>
+                  <option>Interview Date</option>
+                  <option>Verification Date</option>
+                  <option>Verification Completion Date</option>
+                  <option>Recertification Request Date</option>
+                  <option>Recertification Completion Date</option>
+                  <option>Active Referral Options</option>
+                  <option>Hired Date</option>
+                  <option>ReferredBy</option>
+                  <option>First Shift Date</option>
+                  <option>Referral Paid Date</option>
+                  <option>Amount</option>
+                  <option>Notepad</option>
+                  <option>Referral Code</option>
+                  <option>Access ID</option>
+                  <option>Microstaffer ID</option>
+                  <option>Created At</option>
+                  <option>Updated At</option>
+                </select> -->
+
+            </div>
+          </td>
+          <td style="padding-top: 10px;">
+            <div style="opacity: 1;height: auto;overflow: visible">
+              <select id="select-second-integer-filter_1" name ="select-second-filter" class="select form-control" style="width:200px;max-height:80px;overflow: auto;margin-left: 7px;">
+                <option id="option-equal-1">equal to</option>
+                <option id="option-non-equal-1">non equal to</option>
+                <option id="option-less-1">less than</option>
+                <option id="option-less-equal-1">less than or equals</option>
+                <option id="option-greater-1">greater than</option>
+                <option id="option-greater-equal-1">greater than or equals</option>
+                <option id="option-is-empty-1">is empty</option>
+                <option id="option-is-not-empty-1">is not empty</option>
+              </select>
+
+              <select id="select-second-string-filter_1" name ="select-second-filter" class="select form-control" style="width:200px;max-height:80px;overflow: auto;margin-left: 7px;display: none;">
+                <option id="option-string-is-1">is</option>
+                <option id="option-string-is-not-1">isn't</option>
+                <option id="option-string-contains-1">contains</option>
+                <option id="option-string-starts-with-1">starts with</option>
+                <option id="option-string-ends-with-1">ends with</option>
+                <option id="option-string-is-empty-1">is empty</option>
+                <option id="option-string-is-not-empty-1">is not empty</option>
+              </select>
+
+              <select id="select-second-date-filter_1" name ="select-second-filter" class="select form-control"  onchange="onDateSetting1()" style="width:200px;max-height:80px;overflow: auto;margin-left: 7px;display: none;">
+                <option id="option-date-is-1">is</option>
+                <option id="option-date-is-not-1">isn't</option>
+                <option id="option-date-is-before-1">is before</option>
+                <option id="option-date-is-after-1">is after</option>
+                <option id="option-date-between-1">between</option>
+                <option id="option-date-not-between-1">not between</option>
+                <option id="option-date-is-empty-1">is empty</option>
+                <option id="option-date-is-not-empty-1">is not empty</option>
+              </select>
+            </div>
+          </td>
+
+          <td style="padding-top: 10px;">
+            <div style="opacity: 1;height: auto;overflow: visible;">
+              <input size="30" maxlength="18" type="text" id="searchnum_inputfield_1"  name="searchnum_inputfield_1" class="form-control" style="margin-left: 7px">
+            </div>
+          </td>
+          <td id="add-plus-1" style="padding-top: 10px;">
+            <div style="opacity: 1;height: auto;overflow: visible;" id="add-plus1">
+              <div id="removeDiv-1" class="removeCriteria" style="display: none;" onclick="onRemove(1)"></div>
+              <div onclick="onAdd()" class="check-add addCriteria" ></div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="form-group">
+        <%= render 'form',report:@report %>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,153 @@
+ <div class="container" style="    margin-top: 15px;">
+    <div class="breadcrumbs">Sites &gt; Filter &gt; <%= @site.hospital_name %> , <%= @site.id %></div>
+    <div class="paper-trail">Last Modified by
+      <% if @version.whodunnit && @version.whodunnit != 'Guest' %>
+          <% user = User.find_by_id(@version.whodunnit) %>
+          <% if user %>
+              <%= user.name %>
+          <% end %>
+      <% else %>
+          Guest
+      <% end %>
+      on <%= l(@version.created_at, format: "%-d.%m.%Y %H:%M:%S %Z") %></div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="page-header form-group" style="margin-top: 10px;">
+    <%= link_to 'Edit Records', edit_site_path(@site) , :class=>"btn btn-custom pull-right" , :style=>"margin-left:10px;"%> <%= link_to 'Back', sites_path , :class=>"btn btn-custom pull-right" , :style=>"margin-left:10px;"%>
+    <h1><%= @site.hospital_name %></h1>
+  </div>
+  <div class="form-group">
+
+
+  <div class="form-group info-group">
+<p>
+  <strong>Rails:</strong>
+  <%= @site.id %>
+</p>
+
+<p>
+  <strong>Hospital name:</strong>
+  <%= @site.hospital_name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @site.address %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= @site.phone_number %>
+</p>
+
+<p>
+  <strong>Fax Number:</strong>
+  <%= @site.fax_number %>
+</p>
+
+<p>
+  <strong>Po box:</strong>
+  <%= @site.po_box %>
+</p>
+  </div>
+
+    <div class="form-group info-group">
+    <p>
+  <strong>Housing info:</strong>
+    </p>
+      <% @site.housing_info.each do |housing_info| %>
+          <p class="json-field">
+            Housing Skill:<%=housing_info.housing_skill%>
+          </p>
+
+          <p class="json-field">
+            Housing Time:<%=housing_info.housing_time%>
+          </p>
+      <% end %>
+    </div>
+    
+    
+     <script>
+        function onAdd(id){
+            $.getScript('/sites/new/?mid='+id, function() {});
+        }
+    </script>
+
+    <div class="form-group info-group">
+      <h4 class="console-header">Notes</h4>
+      <a id="add-note" class="" onclick="onAdd(<%=@mid %>)" ><span class="glyphicon glyphicon-plus"></span>Add Note</a>
+
+      <%@notes.each do |note|%>
+          <div class="note-wrapper">
+            <div><%=note.note%></div>
+            <div class="signature"><%=note.timestamp %> | <i><%=note.author %>,<%=note.category %></i></div>
+          </div>
+      <% end %>
+    </div>
+    <div class="form-group info-group">
+<p>
+  <strong>Certification requirements:</strong>
+  <%= @site.certification_requirements %>
+</p>
+
+<div class="form-group">
+  <p>
+    <strong>Contacts:</strong>
+  </p>
+
+  <% @site.contacts.each do |contacts| %>
+      <p class="json-field">
+        Contacts Name:<%=contacts.name%>
+      </p>
+
+      <p class="json-field">
+        Contacts Phone Number:<%=contacts.phone_number%>
+      </p>
+
+      <p class="json-field">
+        Contacts Email:<%=contacts.email%>
+      </p>
+
+      <p class="json-field">
+        Contacts Description:<%=contacts.description%>
+      </p>
+
+<% end %>
+</div>
+
+<p>
+  <strong>Status options:</strong>
+  <%= @site.status_options %>
+</p>
+
+<p>
+  <strong>Dwc contact staff:</strong>
+  <%= @site.dwc_contact_staff %>
+</p>
+
+<p>
+  <strong>Affiliation:</strong>
+  <%= @site.affiliation %>
+</p>
+
+<p>
+  <strong>Billing address:</strong>
+  <%= @site.billing_address %>
+</p>
+
+
+<p>
+  <strong>Access:</strong>
+  <%= @site.access_id %>
+</p>
+
+<p>
+  <strong>Microstaffer:</strong>
+  <%= @site.microstaffer_id %>
+</p>
+    </div>
+</div>
+</div>

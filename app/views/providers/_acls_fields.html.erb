@@ -1,0 +1,26 @@
+<div class="json-header col-md-12">
+    <div class="col-md-2 col-md-offset-3"><a class="glyphicon glyphicon-plus"></a></div>
+</div>
+<div class="json-body col-md-12">
+  <div class="row col-md-12">
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="input-group date">
+          <%= f.text_field :issue_date, :class => "input-group date datepicker" %>
+          <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="input-group date">
+          <%= f.text_field :expiration_date, :class => "input-group date datepicker" %>
+          <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6"><%= f.select :state, options_for_select(us_states) %></div>
+    <div class="col-md-6"><%= f.hidden_field :url, placeholder: "URL" %></div>
+    <%= f.hidden_field :_destroy %>
+  </div>
+</div>

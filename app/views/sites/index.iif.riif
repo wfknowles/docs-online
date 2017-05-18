@@ -1,0 +1,14 @@
+iif.trns do
+      row do
+        trnsid 123
+        trnstype 'INVOICE'
+        date '8/31/1988'
+        accnt 'Accounts Receivable'
+        name 'Customer'
+        amount 20
+        clear 'N'
+        toprint 'N'
+        addr1 'Baker'
+        addr2 'Customer'
+      end
+end

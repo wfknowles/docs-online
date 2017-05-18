@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Docs Who Care Online" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Docs Who Care Online" %>">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+    <%= stylesheet_link_tag "style" %>
+    <%= csrf_meta_tags %>
+
+  </head>
+  <body>
+    
+  <%= render 'layouts/navigation' %>
+
+    <main role="main">
+      
+      <div class="container">
+       <%= render 'layouts/messages' %>
+      </div>
+       <%= yield %>
+      <div id='remote_container'></div>
+    </main>
+
+    <!--<div class="footer-top">&nbsp;</div>-->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 copy">
+            <p> <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> Docs Who Care, 2017</p>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

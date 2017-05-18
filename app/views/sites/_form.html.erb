@@ -1,0 +1,141 @@
+<%= form_for(site) do |f| %>
+    <% if site.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(site.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% site.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row">
+
+      <div class="row info-tab">
+        <span class="title">Basic</span>
+      </div>
+    <div class="info-group row">
+    <div class="form-group col-md-6">
+    <div class="field">
+      <%= f.label :hospital_name , :class =>"col-md-5" %>
+      <%= f.text_field :hospital_name %>
+    </div>
+    
+     <div class="field">
+        <%= f.label :po_box, :class =>"col-md-5"  %>
+        <%= f.text_field :po_box %>
+      </div>
+
+     <div class="field">
+        <%=f.label :address,:class =>"col-md-12"%>
+        <%= f.fields_for :address do |address_form| %>
+            <%= render 'address_fields', f: address_form %>
+        <% end %>
+      </div>
+      <div class="field" style="display:none;">
+        <%= f.label :city , :class =>"col-md-5" %>
+        <%= f.text_field :city %>
+      </div>
+
+
+    </div>
+    <div class="form-group col-md-6">
+      <div class="field">
+        <%= f.label :phone_number , :class =>"col-md-5
+        "%>
+        <%= f.text_field :phone_number %>
+      </div>
+      <div class="field">
+        <%= f.label :fax_number, :class =>"col-md-5"  %>
+        <%= f.text_field :fax_number %>
+      </div>
+
+      
+       <div class="field">
+        <%=f.label :billing_address,:class =>"col-md-12"%>
+        <%= f.fields_for :billing_address do |billing_address_form| %>
+            <%= render 'billing_address_fields', f: billing_address_form %>
+        <% end %>
+      </div>
+    </div>
+    </div>
+</div>
+<div class="row">
+<div class="row info-tab">
+  <span class="title">Contacts</span>
+</div>
+  <div class="info-group row">
+    <div class="form-group  col-md-6">
+
+      <div class="field">
+        <%=f.label :contacts,:class =>"col-md-12"%>
+        <%= f.fields_for :contacts do |contacts_form| %>
+            <%= render 'contacts_fields', f: contacts_form %>
+        <% end %>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+    <div class="row">
+<div class="info-tab row">
+  <span class="title">Certification</span>
+</div>
+      <div class="info-group row">
+    <div class="form-group col-md-6">
+
+    <div class="field">
+      <%= f.label :status_options , :class =>"col-md-5"%>
+      <%= f.select :status_options,[['Active','Active'],['Inactive','Inactive'],['P','P'],['P1','P1'],['DQ','DQ'],['S','S']],:style=>"width:185px;height:27px;" %>
+    </div>
+
+
+    <div class="field">
+      <%= f.label :dwc_contact_staff , :class =>"col-md-5"%>
+      <%= f.text_field :dwc_contact_staff %>
+    </div>
+
+    <div class="field">
+      <%= f.label :affiliation, :class =>"col-md-5" %>
+      <%= f.text_field :affiliation %>
+    </div>
+
+    
+
+    <div class="field">
+      <%= f.label :access_id, :class =>"col-md-5" %>
+      <%= f.number_field :access_id %>
+    </div>
+
+    <div class="field">
+      <%= f.label :microstaffer_id , :class =>"col-md-5"%>
+      <%= f.number_field :microstaffer_id %>
+    </div>
+      <div class="field">
+        <%=f.label :housing_info,:class =>"col-md-12"%>
+        <%= f.fields_for :housing_info do |housing_info_form| %>
+            <%= render 'housing_info_fields', f: housing_info_form %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-group  col-md-6">
+      <div class="field">
+        <%= f.label :certification_requirements, :class =>"col-md-5",:style=>"margin-bottom: 12px;"%>
+        <%= f.text_area :certification_requirements ,:style=>"width:530px;height:180px;"%>
+      </div>
+      <div class="field">
+        <%= f.label :notepad, :class =>"col-md-5"%>
+        <%= f.text_area :notepad ,:style=>"width:530px;height:180px;"%>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+  <div class="actions row info-group">
+    <%= f.submit class:'btn btn-primary' %>
+  </div>
+    </div>
+<% end %>

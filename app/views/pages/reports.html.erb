@@ -1,0 +1,16 @@
+<div class="container">
+  <% content_for :title do %>Reports<% end %>
+  <h3>Reports for the Website</h3>
+  <div class="form-group info-tab">
+    <span class="title">Providers</span>
+  </div>
+  <div class="form-group info-group">
+    <%= link_to 'Download all providers as .xlsx', providers_path(format: :xlsx) %>
+  </div>
+  <div class="form-group info-tab">
+    <span class="title">Sites</span>
+  </div>
+  <div class="form-group info-group">
+    <%= link_to 'Download all sites as .xlsx', sites_path(format: :xlsx) %>
+  </div>
+</div>

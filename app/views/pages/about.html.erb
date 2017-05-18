@@ -1,0 +1,36 @@
+<div class="container">
+  <%= javascript_include_tag 'setting'%>
+<% content_for :title do %>About<% end %>
+<h3>Bulk Upload</h3>
+  <div class="info-group row">
+  <div class="form-group">
+  <select id="csv_select_id" class="form-control">
+    <option value="Provider" selected>Provider</option>
+    <option value="Site">Site</option>
+    <option value="Shift">Shift</option>
+  </select>
+  </div>
+  <div id="site_import_div" class="form-group" style="display: none;">
+    <%= form_tag import_sites_path, multipart: true do %>
+        <%= file_field_tag :file , class: "form-control btn btn-custom",style:"margin-top:15px" %>
+        <%= submit_tag "Import CSV for Site",class: "btn btn-primary",style:"margin-top:15px"%>
+    <% end %>
+  </div>
+
+  <div id="provider_import_div" class="form-group">
+    <%= form_tag import_providers_path, multipart: true do %>
+        <%= file_field_tag :file , class: "form-control btn btn-custom",style:"margin-top:15px" %>
+        <%= submit_tag "Import CSV for Provider" ,class: "btn btn-primary",style:"margin-top:15px"%>
+
+    <% end %>
+  </div>
+
+  <div id="event_import_div" class="form-group" style="display: none;">
+    <%= form_tag import_events_path, multipart: true do %>
+        <%= file_field_tag :file , class: "form-control btn btn-custom",style:"margin-top:15px" %>
+        <%= submit_tag "Import CSV for Shift" ,class: "btn btn-primary",style:"margin-top:15px"%>
+
+    <% end %>
+  </div>
+  </div>
+</div>

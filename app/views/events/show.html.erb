@@ -1,0 +1,82 @@
+<div class="container" style="    margin-top: 15px;">
+    <div class="breadcrumbs">Sites &gt; Filter &gt; <%= @event.title %> , <%= @event.id %></div>
+    <div class="paper-trail">Last Modified by
+      <% if @version.whodunnit && @version.whodunnit != 'Guest' %>
+          <% user = User.find_by_id(@version.whodunnit) %>
+          <% if user %>
+              <%= user.name %>
+          <% end %>
+      <% else %>
+          Guest
+      <% end %>
+      on <%= l(@version.created_at, format: "%-d.%m.%Y %H:%M:%S %Z") %></div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="page-header form-group" style="margin-top: 10px;">
+    <%= link_to 'Edit Records', edit_event_path(@event) , :class=>"btn btn-custom pull-right" , :style=>"margin-left:10px;"%> <%= link_to 'Back', events_path , :class=>"btn btn-custom pull-right" , :style=>"margin-left:10px;"%>
+    <h1><%= @event.title %></h1>
+  </div>
+  <div class="form-group">
+
+
+  <div class="form-group info-group">
+<p>
+  <strong>Title:</strong>
+  <%= @event.title %>
+</p>
+
+
+
+<p>
+  <strong>Start Time:</strong>
+  <%= @event.start %>
+</p>
+
+<p>
+  <strong>End Time:</strong>
+  <%= @event.end %>
+</p>
+
+  </div>
+
+  
+   
+    
+     <script>
+        function onAdd(id){
+            $.getScript('/events/note/?mid='+id, function() {});
+        }
+    </script>
+
+    <div class="form-group info-group">
+      <h4 class="console-header">Notes</h4>
+      <a id="add-note" class="" onclick="onAdd(<%=@mid %>)" ><span class="glyphicon glyphicon-plus"></span>Add Note</a>
+
+      <%@notes.each do |note|%>
+          <div class="note-wrapper">
+            <div><%=note.note%></div>
+            <div class="signature"><%=note.timestamp %> | <i><%=note.author %>,<%=note.category %></i></div>
+          </div>
+      <% end %>
+    </div>
+    
+    
+
+<div class="form-group info-group">
+   <p>
+  <strong>Status:</strong>
+    <%= @event.status %>
+  </p>
+
+
+<p>
+  <strong>Area:</strong>
+  <%= @event.area %>
+</p>
+
+
+</div>
+</div>

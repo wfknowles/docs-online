@@ -1,0 +1,32 @@
+<div class="modal fade" id="new_sticky">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">New Note</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @note ,remote: true do |f| %>
+            <div class="form-inputs">
+              <div class="field">
+                <%= f.input :note %>
+              </div>
+
+              <%= f.input :author,:input_html => { :value => current_user.name } %>
+              <%= f.input :category,:collection=>[['RM','RM'],['RMT','RMT'],['RMT','RMT'],['Verifications','Verifications'],['Recruiting','Recruiting'],['Data Input','Data Input']] %>
+              <%= f.input :timestamp %>
+              <%= f.input :hide_sticky %>
+               <div style="display:none;">
+                 <%= f.input :notable_id,:input_html=>{:value=>@mid}%>
+                <%= f.input :notable_type,:input_html=>{:value=>'Site'} %>
+              </div>
+            </div>
+
+            <div class="form-actions row info-group">
+              <%= f.button :submit, class:'btn btn-primary' %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

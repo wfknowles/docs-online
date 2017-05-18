@@ -1,0 +1,14 @@
+<div class="json-header col-md-12">
+    <%= f.label :type, :class => "col-md-3" %>
+    <%= f.label :number, :class => "col-md-4" %>
+    <%= f.label :carrier, :class => "col-md-4" %>
+</div>
+<div class="json-body col-md-12">
+  <div class="row col-md-12">
+    <div class="col-md-3"><%= f.select :type, [['Primary','primary'],['Home','home'],['Office','office'],['Cell','cell'],['Alternate','alternate']] %></div>
+    <div class="col-md-4"><%= f.telephone_field :number, :class =>"phone-number", placeholder: "Phone Number" %></div>
+    <div class="col-md-3"><%= f.select :carrier, [['',''],['Verizon','verizon'],['AT&T','att'],['Sprint','sprint'],['Cricket','cricket']] %></div>
+    <a class="col-md-1 glyphicon glyphicon-plus"></a>
+    <%= f.hidden_field :_destroy %>
+  </div>
+</div>

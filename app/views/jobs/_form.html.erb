@@ -1,0 +1,55 @@
+<%= simple_form_for(@job) do |f| %>
+    <% if job.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(job.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% job.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+
+
+
+    <div class="info-group row">
+      <div class="field">
+        <%= f.input :action,default: ["Email"],collection:["Email","PDF"] %>
+      </div>
+      <div class="field">
+        <%= f.input :report,default: ["Expiring Credentials"],collection: ["Expiring Credentials","Load","All","Available","Reports"] %>
+      </div>
+      <div class="field">
+        <%= f.input :display,default:["Document"],collection: ["Document","Document Category"] %>
+      </div>
+      <div class="field">
+        <%= f.input :document ,default:["Notification Layout"],collection: ["Notification Layout","Load","All","Available","Documnets"] %>
+      </div>
+      <div class="field">
+        <%= f.input :category ,default:["Category"],collection: ["Category","Load","All","Available","Document Categories"] %>
+      </div>
+    </div>
+
+
+    <div class="actions row info-group">
+      <span>
+        <%= submit_tag 'SCHEDULE',class:'btn btn-primary jobs-submit-class'%>
+      </span>
+      <span>
+      <%= f.submit 'RUN NOW', class:'btn btn-primary',style:'background:#f7d035;;color:#b38615;border-color:#ffffff;' %>
+      </span>
+    </div>
+
+
+
+<% end %>
+
+
+
+
+
+
+

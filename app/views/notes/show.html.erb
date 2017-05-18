@@ -1,0 +1,52 @@
+
+<div class="container" style="    margin-top: 15px;">
+  <div class="breadcrumbs">Sites &gt; Filter &gt; <%= @note.author %> , <%= @note.id %></div>
+  <div class="paper-trail">Last Modified by
+    <% if @version.whodunnit && @version.whodunnit != 'Guest' %>
+        <% user = User.find_by_id(@version.whodunnit) %>
+        <% if user %>
+            <%= user.name %>
+        <% end %>
+    <% else %>
+        Guest
+    <% end %>
+    on <%= l(@version.created_at, format: "%-d.%m.%Y %H:%M:%S %Z") %></div>
+</div>
+</div>
+
+
+<div class="container">
+  <div class="page-header form-group" style="margin-top: 10px;">
+    <%= link_to 'Edit Records', edit_note_path(@note) , :class=>"btn btn-custom pull-right" , :style=>"margin-left:10px;"%> <%= link_to 'Back', notes_path , :class=>"btn btn-custom pull-right" , :style=>"margin-left:10px;"%>
+    <h1><%= @note.author %></h1>
+  </div>
+  <div class="form-group">
+
+    <div class="form-group info-group">
+      <p>
+        <strong>Note:</strong>
+        <%= @note.note %>
+      </p>
+
+      <p>
+        <strong>Author:</strong>
+        <%= @note.author %>
+      </p>
+
+      <p>
+        <strong>Category:</strong>
+        <%= @note.category %>
+      </p>
+
+      <p>
+        <strong>Timestamp:</strong>
+        <%= @note.timestamp %>
+      </p>
+
+      <p>
+        <strong>Hide sticky:</strong>
+        <%= @note.hide_sticky %>
+      </p>
+    </div>
+  </div>
+</div>

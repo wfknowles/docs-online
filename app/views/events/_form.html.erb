@@ -1,0 +1,99 @@
+<%= simple_form_for @event, remote: true do |f| %>
+  <div class="row">
+    <div class="form-group">
+     <div class="col-md-12"> <%= f.input :title %></div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-6"><%= f.select :provider_id,Provider.all.collect{|u| [u.first_name+'  '+u.last_name,u.id]},:class=>"event-provider"%></div>
+      <div  class="col-md-6"><%= f.select :site_id, Site.all.collect{|v| [v.hospital_name,v.id]},:class=>"event-site" %></div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-6">
+        <%= f.input :date_range, input_html: { class: "form-control input-sm date-range-picker" } %>
+        <%= f.input_field :start, as: :hidden, value: Date.today, class: 'form-control input-sm start_hidden' %>
+        <%= f.input_field :end, as: :hidden, value: Date.today, class: 'form-control input-sm end_hidden' %>
+      </div>
+
+      <script>
+        $("#status-select-id").on("change",function(){
+            var status=$("#status-select-id").val();
+            $("#filled-on-id").val(status);
+        });
+      </script>
+      <div class="col-md-6">
+        <%= f.input :status,as: :select,collection: [['Active','Active'],['Deactive','Deactive']],:id=>"status-select-id"%>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="col-md-3">
+        <%= f.input :hide_from_schedule%>
+      </div>
+      <div class="col-md-9">
+        <%= f.input :area,as: :select,collection: [['ED','ED'],['Clinic','Clinic'],['Hospital','Hospital']]%>
+      </div>
+    </div>
+
+    <script>
+        $('#enable_custom_bill').change(function () {
+            $("#div_custom_bill").show();
+            $("#div_enable_custom_bill").hide();
+        });
+    </script>
+    <div class="form-group" id="div_enable_custom_bill">
+      <div class="col-md-12"><input type="checkbox" id="enable_custom_bill">Enable Custom Bill/Pay Rate<br></div>
+    </div>
+    <div class="form-group"  id="div_custom_bill" style="display: none;">
+      <div class="col-md-6">
+        <%= f.input :custom_pay_rate,as: :integer%>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :custom_bill_rate,as: :integer%>
+      </div>
+
+    </div>
+
+    <div class="form-group" id="div-add-note" style="display: none;">
+      <div class="field">
+        <script>
+            function onAdd(id){
+                $.getScript('/events/note/?mid='+id, function() {});
+            }
+        </script>
+        <a id="add-note" class="" onclick="onAdd(<%=@mid %>)"><span class="glyphicon glyphicon-plus"></span>Add Note</a>
+        <%if @notes!=nil%>
+            <% @notes.each do |note|%>
+                <div class="note-wrapper">
+                  <div><%=note.note%></div>
+                  <div class="signature"><%=note.timestamp %> | <i><%=note.author %>,<%=note.category %></i></div>
+                </div>
+            <% end %>
+            <%end%>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12"><%= f.input :color, as: :select, collection: [['Black','black'], ['Green','green'], ['Red','red'],['Blue','blue'],['Yellow','yellow'],['Orange','orange'],['Purple','purple']] %></div>
+    </div>
+
+    <div class="form-group" style="display: none;" id="div-filled-on">
+      <div class="col-md-6">
+        <%= f.input :filled_on,:id=>"filled-on-id"%>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="form-actions">
+    <%= f.button :submit ,:class=>"btn btn-primary"%>
+    <%= link_to 'Delete', 
+                event, 
+                method: :delete, 
+                class: 'btn btn-danger', 
+                data: { confirm: 'Are you sure?' }, 
+                remote: true unless @event.new_record? %>
+  </div>
+<% end %>

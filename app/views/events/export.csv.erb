@@ -1,0 +1,9 @@
+<%- headers = @addcolumns -%>
+<%= CSV.generate_line headers %>
+<%- @events_xlsx.each do |shift| -%>
+    <%-  columns = [] -%>
+    <%- @addcolumns.each do |addcol| -%>
+        <%- columns.push shift[addcol]-%>
+    <%- end -%>
+    <%= CSV.generate_line(columns) -%>
+<%- end -%>

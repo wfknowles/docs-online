@@ -1,0 +1,14 @@
+<div class="json-header col-md-12">
+    <div class="col-md-6">Insurance Policy</div>
+    <div class="col-md-2 col-md-offset-3"><a class="glyphicon glyphicon-plus"></a></div>
+</div>
+<div class="json-body col-md-12">
+  <div class="row col-md-12">
+    <div class="col-md-6"><%= f.select :carrier, options_for_select(insurance_carriers) %></div>
+    <div class="col-md-6"><%= f.select :coverage, options_for_select(insurance_coverage) %></div>
+    <div class="col-md-6"><%= f.text_field :policy_number, placeholder: "Policy Number" %></div>
+    <div class="col-md-6"><%= f.text_field :expiration, :class => "datepicker" %><span class="glyphicon glyphicon-calendar"></span></div>
+    <div class="col-md-12"><%= f.text_field :carrier_address, placeholder: "Carrier Address" %></div>
+    <%= f.hidden_field :_destroy %>
+  </div>
+</div>
